@@ -85,8 +85,14 @@ Returns Tile for given latlng coordinates
 -   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
-Returns **Tile** latLngToTile({lat: 45, lng: 90, zoom: 5})
+**Examples**
+
+```javascript
+latLngToTile({lat: 45, lng: 90, zoom: 5})
 //=> Tile { tx: 23, ty: 20, zoom: 5 }
+```
+
+Returns **Tile** 
 
 # latLngToGoogle
 
@@ -115,8 +121,14 @@ Returns Tile for given mercator coordinates
 -   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
-Returns **Tile** metersToTile({mx: 10000000, my: 5500000, zoom: 5})
+**Examples**
+
+```javascript
+metersToTile({mx: 10000000, my: 5500000, zoom: 5})
 //=> Tile { tx: 23, ty: 20, zoom: 5 }
+```
+
+Returns **Tile** 
 
 # pixelsToMeters
 

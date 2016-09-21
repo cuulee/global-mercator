@@ -94,6 +94,7 @@ export function metersToPixels(init: InterfaceMeters) {
  * @param {number} lng
  * @param {number} zoom
  * @returns {Tile}
+ * @example
  * latLngToTile({lat: 45, lng: 90, zoom: 5})
  * //=> Tile { tx: 23, ty: 20, zoom: 5 }
  */
@@ -123,6 +124,7 @@ export function latLngToGoogle(init: InterfaceLatLng) {
  * @param {number} mx
  * @param {number} my
  * @returns {Tile}
+ * @example
  * metersToTile({mx: 10000000, my: 5500000, zoom: 5})
  * //=> Tile { tx: 23, ty: 20, zoom: 5 }
  */
