@@ -94,6 +94,8 @@ export function metersToPixels(init: InterfaceMeters) {
  * @param {number} lng
  * @param {number} zoom
  * @returns {Tile}
+ * latLngToTile({lat: 45, lng: 90, zoom: 5})
+ * //=> Tile { tx: 23, ty: 20, zoom: 5 }
  */
 export function latLngToTile(init: InterfaceLatLng) {
   return mercator.latLngToTile(init)
@@ -106,6 +108,9 @@ export function latLngToTile(init: InterfaceLatLng) {
  * @param {number} lat
  * @param {number} lng
  * @returns {Google} Google Tile
+ * @example
+ * latLngToGoogle({lat: 45, lng: 90, zoom: 5})
+ * //=> Google { x: 23, y: 11, zoom: 5 }
  */
 export function latLngToGoogle(init: InterfaceLatLng) {
   return mercator.latLngToGoogle(init)
@@ -118,6 +123,8 @@ export function latLngToGoogle(init: InterfaceLatLng) {
  * @param {number} mx
  * @param {number} my
  * @returns {Tile}
+ * metersToTile({mx: 10000000, my: 5500000, zoom: 5})
+ * //=> Tile { tx: 23, ty: 20, zoom: 5 }
  */
 export function metersToTile(init: Meters) {
   return mercator.metersToTile(init)
