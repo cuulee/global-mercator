@@ -8,6 +8,14 @@ Converts given lat/lon in WGS84 Datum to XY in Spherical Mercator EPSG:900913
 
 -   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** (Optional)
+
+**Examples**
+
+```javascript
+latLngToMeters({lat: 45, lng: 90})
+//=> Meters { mx: 10018754.171394622, my: 5621521.486192067 }
+```
 
 Returns **Meters** 
 
@@ -30,6 +38,14 @@ Converts XY point from Spherical Mercator EPSG:900913 to lat/lng in WGS84 Datum
 
 -   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** (Optional)
+
+**Examples**
+
+```javascript
+metersToLatLng({mx: 10000000, my: 5500000})
+//=> LatLng { lat: 44.2228902348575, lng: 89.83152841195214 }
+```
 
 Returns **LatLng** 
 
@@ -53,6 +69,13 @@ Converts EPSG:900913 to pyramid pixel coordinates in given zoom level
 -   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+
+**Examples**
+
+```javascript
+metersToPixels({mx: 10000000, my: 5500000, zoom: 13})
+//=> Pixels { px: 1571882.5818671728, py: 1336394.6200269451, zoom: 13 }
+```
 
 Returns **Pixels** 
 
@@ -422,7 +445,7 @@ Converts bounds from LatLng to Meters
 
 **Parameters**
 
--   `bounds` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** an Array of bounding box coordinates in the form: `[xLow, yLow, xHigh, yHigh]`
+-   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** extent in [minX, minY, maxX, maxY] order
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bounds
 
@@ -432,7 +455,7 @@ Converts bounds from LatLng to Meters
 
 **Parameters**
 
--   `bounds` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** an Array of bounding box coordinates in the form: `[xLow, yLow, xHigh, yHigh]`
+-   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** extent in [minX, minY, maxX, maxY] order
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bounds
 
@@ -495,6 +518,17 @@ const meters = validateMeters([-115, 44])
 //= [-115, 44]
 ```
 
+# validateLatLng
+
+Validates LatLng
+
+**Examples**
+
+```javascript
+validateLatLng([-115, 44])
+//= [-115, 44]
+```
+
 # validateLngLat
 
 Validates LngLat
@@ -502,7 +536,7 @@ Validates LngLat
 **Examples**
 
 ```javascript
-const lnglat = validateLngLat([-115, 44])
+validateLngLat([-115, 44])
 //= [-115, 44]
 ```
 
@@ -519,7 +553,7 @@ const bounds = validateBounds([ -75, 44, -74, 45 ])
 
 # LngLatBounds
 
-LngLatbounds
+LngLatBounds
 
 **Examples**
 

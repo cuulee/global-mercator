@@ -10,7 +10,7 @@ const debug = {
 export interface InterfaceMeters {
   mx: number
   my: number
-  zoom: number
+  zoom?: number
 }
 
 export interface InterfacePixels {
@@ -19,7 +19,7 @@ export interface InterfacePixels {
   zoom: number
 }
 
-export interface InterfaceLngLat {
+export interface InterfaceLatLng {
   lat: number
   lng: number
   zoom?: number
@@ -44,9 +44,13 @@ export interface InterfaceTile {
  * @name latLngToMeters
  * @param {number} lat
  * @param {number} lng
+ * @param {number} zoom (Optional)
  * @returns {Meters}
+ * @example
+ * latLngToMeters({lat: 45, lng: 90})
+ * //=> Meters { mx: 10018754.171394622, my: 5621521.486192067 }
  */
-export function latLngToMeters(init: InterfaceLngLat) {
+export function latLngToMeters(init: InterfaceLatLng) {
   return mercator.latLngToMeters(init)
 }
 
@@ -56,7 +60,11 @@ export function latLngToMeters(init: InterfaceLngLat) {
  * @name metersToLatLng
  * @param {number} mx
  * @param {number} my
+ * @param {number} zoom (Optional)
  * @returns {LatLng}
+ * @example
+ * metersToLatLng({mx: 10000000, my: 5500000})
+ * //=> LatLng { lat: 44.2228902348575, lng: 89.83152841195214 }
  */
 export function metersToLatLng(init: InterfaceMeters) {
   return mercator.metersToLatLng(init)
@@ -70,6 +78,9 @@ export function metersToLatLng(init: InterfaceMeters) {
  * @param {number} my
  * @param {number} zoom
  * @returns {Pixels}
+ * @example
+ * metersToPixels({mx: 10000000, my: 5500000, zoom: 13})
+ * //=> Pixels { px: 1571882.5818671728, py: 1336394.6200269451, zoom: 13 }
  */
 export function metersToPixels(init: InterfaceMeters) {
   return mercator.metersToPixels(init)
@@ -84,7 +95,7 @@ export function metersToPixels(init: InterfaceMeters) {
  * @param {number} zoom
  * @returns {Tile}
  */
-export function latLngToTile(init: InterfaceLngLat) {
+export function latLngToTile(init: InterfaceLatLng) {
   return mercator.latLngToTile(init)
 }
 
@@ -96,7 +107,7 @@ export function latLngToTile(init: InterfaceLngLat) {
  * @param {number} lng
  * @returns {Google} Google Tile
  */
-export function latLngToGoogle(init: InterfaceLngLat) {
+export function latLngToGoogle(init: InterfaceLatLng) {
   return mercator.latLngToGoogle(init)
 }
 
@@ -268,7 +279,7 @@ export function quadKeyGoogle(quadkey: string) {
  * Converts bounds from LatLng to Meters
  * 
  * @name boundsLatLngToMeters
- * @param {Array<number>} bounds an Array of bounding box coordinates in the form: ```[xLow, yLow, xHigh, yHigh]```
+ * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @returns {Array<number>} bounds
  */
 export function boundsLatLngToMeters(bounds: number[]): number[] {
@@ -402,35 +413,47 @@ export function validateMeters(init: number[]) {
 }
 
 /**
+ * Validates LatLng
+ * @name validateLatLng
+ * @example
+ * validateLatLng([-115, 44])
+ * //= [-115, 44]
+ */
+export function validateLatLng(init: number[]) {
+  const [lng, lat] = validateLngLat([init[1], init[0]])
+  return [lat, lng]
+}
+
+/**
  * Validates LngLat
  * @name validateLngLat
  * @example
- * const lnglat = validateLngLat([-115, 44])
+ * validateLngLat([-115, 44])
  * //= [-115, 44]
  */
 export function validateLngLat(init: number[]) {
   if (init.length < 2 || init.length >= 3) {
-    const message = 'LngLat must be an Array of 2 numbers'
+    const message = 'LatLng must be an Array of 2 numbers'
     debug.error(message)
     throw new Error(message)
   }
   let [lng, lat] = init
   if (lat < -90 || lat > 90) {
-    const message = 'LngLat [lat] must be within -90 to 90 degrees'
+    const message = 'LatLng [lat] must be within -90 to 90 degrees'
     debug.error(message)
     throw new Error(message)
   } else if (lng < -180 || lng > 180) {
-    const message = 'LngLat [lng] must be within -180 to 180 degrees'
+    const message = 'LatLng [lng] must be within -180 to 180 degrees'
     debug.error(message)
     throw new Error(message)
   }
   if (lat > 85) {
-    const message = 'LngLat [lat] has been modified to 85'
+    const message = 'LatLng [lat] has been modified to 85'
     debug.warning(message)
     lat = 85
   }
   if (lat < -85) {
-    const message = 'LngLat [lat] has been modified to -85'
+    const message = 'LatLng [lat] has been modified to -85'
     debug.warning(message)
     lat = -85
   }
@@ -454,7 +477,7 @@ export function validateBounds(init: number[]) {
 }
 
 /**
- * LngLatbounds
+ * LngLatBounds
  * @name LngLatBounds
  * @example
  * const { bounds } = new LngLatBounds([ -75, 44, -74, 45 ])
@@ -477,7 +500,7 @@ export class LngLatBounds {
     this.y2 = y2
     this.t1 = validateLngLat([x1, y1])
     this.t2 = validateLngLat([x2, y2])
-    this.bounds = this.t1.concat(this.t2)
+    this.bounds = [x1, y1, x2, y2]
   }
 }
 
@@ -516,11 +539,12 @@ export class Pixels {
   public zoom: number
 
   constructor(init: InterfacePixels) {
-    const [px, py] = validatePixels([init.px, init.py])
+    const {px, py, zoom} = init
     this.px = px
     this.py = py
-    if (!isUndefined(init.zoom)) { this.zoom = init.zoom }
+    this.zoom = zoom
     validateUndefined(this, 'Pixels')
+    validatePixels([px, py])
   }
 }
 
@@ -530,40 +554,27 @@ export class Meters {
   public zoom: number
 
   constructor(init: InterfaceMeters) {
-    const [mx, my] = validateMeters([init.mx, init.my])
+    const {mx, my, zoom} = init
     this.mx = mx
     this.my = my
-    if (!isUndefined(init.zoom)) { this.zoom = init.zoom }
+    if (!isUndefined(zoom)) { this.zoom = zoom }
     validateUndefined(this, 'Meters')
+    validateMeters([mx, my])
   }
 }
 
-export class LngLat {
+export class LatLng {
   public lat: number
   public lng: number
-  public x: number
-  public y: number
-  public z: number
   public zoom: number
-  public xy: number[]
-  public xyz: number[]
-  public latlng: number[]
-  public lnglat: number[]
-  constructor(init: InterfaceLngLat) {
-    const [lng, lat] = validateLngLat([init.lng, init.lat])
+
+  constructor(init: InterfaceLatLng) {
+    const {lng, lat} = init
     this.lat = lat
     this.lng = lng
-    this.x = lng
-    this.y = lat
-    this.xy = [lng, lat]
-    this.lnglat = [lng, lat]
-    this.latlng = [lat, lng]
-
     if (!isUndefined(init.zoom)) { this.zoom = init.zoom }
-    if (!isUndefined(init.z)) { this.z = init.z } else { this.z = 0 }
-
-    this.xyz = [lng, lat, this.z]
     validateUndefined(this, 'LatLng')
+    validateLatLng([lat, lng])
   }
 }
 
@@ -609,8 +620,8 @@ class GlobalMercator {
    * @param {number} lng
    * @returns {Meters}
    */
-  public latLngToMeters(init: InterfaceLngLat) {
-    const { lat, lng, zoom } = new LngLat(init)
+  public latLngToMeters(init: InterfaceLatLng) {
+    const { lat, lng, zoom } = new LatLng(init)
     let mx: number = lng * this.originShift / 180.0
     let my: number = Math.log(Math.tan((90 + lat) * Math.PI / 360.0 )) / (Math.PI / 180.0)
     my = my * this.originShift / 180.0
@@ -631,7 +642,7 @@ class GlobalMercator {
     let lat = (my / this.originShift) * 180.0
     lat = 180 / Math.PI * (2 * Math.atan( Math.exp( lat * Math.PI / 180.0)) - Math.PI / 2.0)
 
-    return new LngLat({ lat, lng, zoom })
+    return new LatLng({ lat, lng, zoom })
   }
 
   /**
@@ -661,7 +672,7 @@ class GlobalMercator {
    * @param {number} zoom
    * @returns {Tile}
    */
-  public latLngToTile(init: InterfaceLngLat) {
+  public latLngToTile(init: InterfaceLatLng) {
     const meters = this.latLngToMeters(init)
     const pixels = this.metersToPixels(meters)
     return this.pixelsToTile(pixels)
@@ -675,7 +686,7 @@ class GlobalMercator {
    * @param {number} lng
    * @returns {Google} Google Tile
    */
-  public latLngToGoogle(init: InterfaceLngLat) {
+  public latLngToGoogle(init: InterfaceLatLng) {
     if (init.zoom === 0) { return new Google({ x: 0, y: 0, zoom: 0 })}
     const tile = this.latLngToTile(init)
     return this.tileGoogle(tile)
@@ -801,7 +812,7 @@ class GlobalMercator {
    * Converts bounds from LatLng to Meters
    * 
    * @name boundsLatLngToMeters
-   * @param {Array<number>} bounds an Array of bounding box coordinates in the form: ```[xLow, yLow, xHigh, yHigh]```
+   * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
    * @returns {Array<number>} bounds
    */
   public boundsLatLngToMeters = (bounds: number[]): number[] => {
@@ -965,9 +976,12 @@ if (require.main === module) {
   // console.log(metersToPixels(meters))
   // console.log(metersToLatLng(meters))
   // gdalwarp -of GTiff -te -8581121.501851652 -1353354.7654779512 -8575634.45283096 -1349909.177990999 lima_imagery.mbtiles lima_imagery.tif
-  // console.log(validateLngLat([-120, 45, 1]))
+  // console.log(validateLatLng([-120, 45, 1]))
   // validateMeters([200000, 999150000])
   // validateMeters([200000, 150000, 1])
   // validatePixels([200000, 150000, 1])
-  validateUndefined({x: null})
+  // validateUndefined({x: null})
+  // console.log(metersToLatLng({mx: 10018754.171394622, my: 5621521.486192067}))
+  // console.log(metersToPixels({mx: 10000000, my: 5500000, zoom: 13}))
+  console.log(validateLatLng([-85, -120]))
 }

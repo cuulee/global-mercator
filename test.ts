@@ -12,19 +12,19 @@ const PIXELS = { px: 611669, py: 1342753, zoom: 13 }
 const BOUNDS = [ -8350592.466098936, 5620873.311978721, -8345700.496288682, 5625765.281788976 ]
 const BOUNDS_LATLNG = [ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ]
 
-test('LatLonToMeters', t => {
+test('latLngToMeters', t => {
   const meters = mercator.latLngToMeters(LATLNG)
   t.deepEqual(meters.mx.toFixed(2), METERS.mx.toFixed(2))
   t.deepEqual(meters.my.toFixed(2), METERS.my.toFixed(2))
 })
 
-test('MetersToLatLng', t => {
+test('metersToLatLng', t => {
   const latlng = mercator.metersToLatLng(METERS)
   const { lat, lng, zoom } = latlng
   t.deepEqual({lat, lng, zoom}, LATLNG)
 })
 
-test('MetersToPixels', t => {
+test('metersToPixels', t => {
   const pixels = mercator.metersToPixels(METERS)
   const { px, py, zoom } = pixels
   t.deepEqual(px, PIXELS.px)
@@ -32,72 +32,72 @@ test('MetersToPixels', t => {
   t.deepEqual(zoom, PIXELS.zoom)
 })
 
-test('PixelsToTile', t => {
+test('pixelsToTile', t => {
   const tile = mercator.pixelsToTile(PIXELS)
   t.deepEqual(tile, pick(TILE, ['tx', 'ty', 'zoom']))
 })
 
-test('MetersToTile', t => {
+test('metersToTile', t => {
   const tile = mercator.metersToTile(METERS)
   t.deepEqual(tile, pick(TILE, ['tx', 'ty', 'zoom']))
 })
 
-test('PixelsToMeters', t => {
+test('pixelsToMeters', t => {
   const meters = mercator.pixelsToMeters(PIXELS)
   t.deepEqual(meters.mx.toFixed(2), METERS.mx.toFixed(2))
   t.deepEqual(meters.my.toFixed(2), METERS.my.toFixed(2))
 })
 
-test('TileBounds', t => {
+test('tileBounds', t => {
   const bounds = mercator.tileBounds(TILE)
   t.deepEqual(bounds.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
 })
 
-test('TileLatLonBounds', t => {
+test('tileLatLonBounds', t => {
   const bounds = mercator.tileLatLonBounds(TILE)
   t.deepEqual(bounds, BOUNDS_LATLNG)
 })
 
-test('GoogleTile', t => {
+test('tileGoogle', t => {
   const google = mercator.tileGoogle(TILE)
   t.deepEqual(google, pick(GOOGLE, ['x', 'y', 'zoom']))
 })
 
-test('TileQuadKey', t => {
+test('tileQuadKey', t => {
   const quadkey = mercator.tileQuadKey(TILE)
   t.deepEqual(quadkey, QUADKEY)
 })
 
-test('QuadKeyGoogle', t => {
+test('quadKeyGoogle', t => {
   const google = mercator.quadKeyGoogle(QUADKEY)
   t.deepEqual(google, pick(GOOGLE, ['x', 'y', 'zoom']))
 })
 
-test('QuadKeyTile', t => {
+test('quadKeyTile', t => {
   const tile = mercator.quadKeyTile(QUADKEY)
   t.deepEqual(tile, pick(TILE, ['tx', 'ty', 'zoom']))
 })
 
-test('Throws Error QuadKeyTile', t => {
+test('Throws Error quadKeyTile', t => {
   t.throws(() => mercator.quadKeyTile(QUADKEY_BAD), 'Invalid QuadKey digit sequence')
 })
 
-test('GoogleBounds', t => {
+test('googleBounds', t => {
   const bounds = mercator.googleBounds(GOOGLE)
   t.deepEqual(bounds.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
 })
 
-test('GoogleLatLngBounds', t => {
+test('googleLatLonBounds', t => {
   const bounds = mercator.googleLatLonBounds(GOOGLE)
   t.deepEqual(bounds, BOUNDS_LATLNG)
 })
 
-test('LatLngToGoogle', t => {
+test('latLngToGoogle', t => {
   const google = mercator.latLngToGoogle(LATLNG)
   t.deepEqual(google, pick(GOOGLE, ['x', 'y', 'zoom']))
 })
 
-test('GoogleQuadKey', t => {
+test('googleQuadKey', t => {
   const quadkey = mercator.googleQuadKey(GOOGLE)
   t.deepEqual(quadkey, QUADKEY)
 })
@@ -110,10 +110,10 @@ test('Throws Error Bad Bounds', t => {
 })
 
 test('Throws Error Bad LngLat', t => {
-  t.throws(() => new mercator.LngLat({ lat: -220, lng: 120 }), 'LngLat [lat] must be within -90 to 90 degrees')
-  t.throws(() => new mercator.LngLat({ lat: 220, lng: 120 }), 'LngLat [lat] must be within -90 to 90 degrees')
-  t.throws(() => new mercator.LngLat({ lat: 45, lng: -220 }), 'LngLat [lng] must be within -180 to 180 degrees')
-  t.throws(() => new mercator.LngLat({ lat: 45, lng: 220 }), 'LngLat [lng] must be within -180 to 180 degrees')
+  t.throws(() => new mercator.LatLng({ lat: -220, lng: 120 }), 'LatLng [lat] must be within -90 to 90 degrees')
+  t.throws(() => new mercator.LatLng({ lat: 220, lng: 120 }), 'LatLng [lat] must be within -90 to 90 degrees')
+  t.throws(() => new mercator.LatLng({ lat: 45, lng: -220 }), 'LatLng [lng] must be within -180 to 180 degrees')
+  t.throws(() => new mercator.LatLng({ lat: 45, lng: 220 }), 'LatLng [lng] must be within -180 to 180 degrees')
 })
 
 test('boundsLatLngToMeters', t => {
@@ -136,10 +136,14 @@ test('LngLatBounds', t => {
   t.deepEqual(bounds, BOUNDS_LATLNG)
 })
 
+test('validateLatLng', t => {
+  t.deepEqual(mercator.validateLatLng([85, -120]), [85, -120])
+})
+
 test('validateLngLat', t => {
-  t.throws(() => mercator.validateLngLat([-120, 45, 1]), 'LngLat must be an Array of 2 numbers')
-  t.throws(() => mercator.validateLngLat([-120, 190]), 'LngLat [lat] must be within -90 to 90 degrees')
-  t.throws(() => mercator.validateLngLat([-220, 45]), 'LngLat [lng] must be within -180 to 180 degrees')
+  t.throws(() => mercator.validateLngLat([-120, 45, 1]), 'LatLng must be an Array of 2 numbers')
+  t.throws(() => mercator.validateLngLat([-120, 190]), 'LatLng [lat] must be within -90 to 90 degrees')
+  t.throws(() => mercator.validateLngLat([-220, 45]), 'LatLng [lng] must be within -180 to 180 degrees')
   t.deepEqual(mercator.validateLngLat([-120, 85.5]), [-120, 85])
   t.deepEqual(mercator.validateLngLat([-120, -85.5]), [-120, -85])
 })
