@@ -19,17 +19,6 @@ latLngToMeters({lat: 45, lng: 90})
 
 Returns **Meters** 
 
-# latLngToMeters
-
-Converts given lat/lon in WGS84 Datum to XY in Spherical Mercator EPSG:900913
-
-**Parameters**
-
--   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Meters** 
-
 # metersToLatLng
 
 Converts XY point from Spherical Mercator EPSG:900913 to lat/lng in WGS84 Datum
@@ -46,17 +35,6 @@ Converts XY point from Spherical Mercator EPSG:900913 to lat/lng in WGS84 Datum
 metersToLatLng({mx: 10000000, my: 5500000})
 //=> LatLng { lat: 44.2228902348575, lng: 89.83152841195214 }
 ```
-
-Returns **LatLng** 
-
-# metersToLatLng
-
-Converts XY point from Spherical Mercator EPSG:900913 to lat/lng in WGS84 Datum
-
-**Parameters**
-
--   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
 Returns **LatLng** 
 
@@ -79,18 +57,6 @@ metersToPixels({mx: 10000000, my: 5500000, zoom: 13})
 
 Returns **Pixels** 
 
-# metersToPixels
-
-Converts EPSG:900913 to pyramid pixel coordinates in given zoom level
-
-**Parameters**
-
--   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Pixels** 
-
 # latLngToTile
 
 Returns Tile for given latlng coordinates
@@ -102,29 +68,6 @@ Returns Tile for given latlng coordinates
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
 Returns **Tile** 
-
-# latLngToTile
-
-Returns Tile for given latlng coordinates
-
-**Parameters**
-
--   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Tile** 
-
-# latLngToTile
-
-Returns Google Tile for given latlng coordinates
-
-**Parameters**
-
--   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Google** Google Tile
 
 # latLngToGoogle
 
@@ -148,29 +91,6 @@ Returns Tile for given mercator coordinates
 
 Returns **Tile** 
 
-# metersToTile
-
-Returns Tile for given mercator coordinates
-
-**Parameters**
-
--   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Tile** 
-
-# pixelsToMeters
-
-Converts pixel coordinates in given zoom level of pyramid to EPSG:900913
-
-**Parameters**
-
--   `px` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `py` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Meters** 
-
 # pixelsToMeters
 
 Converts pixel coordinates in given zoom level of pyramid to EPSG:900913
@@ -195,43 +115,7 @@ Returns a Tile covering region in given pixel coordinates
 
 Returns **Tile** 
 
-# pixelsToTile
-
-Returns a Tile covering region in given pixel coordinates
-
-**Parameters**
-
--   `px` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `py` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Tile** 
-
 # tileBounds
-
-Returns bounds of the given Tile in EPSG:900913 coordinates
-
-**Parameters**
-
--   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
-
-# tileBounds
-
-Returns bounds of the given Tile in EPSG:900913 coordinates
-
-**Parameters**
-
--   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
-
-# tileLatLonBounds
 
 Returns bounds of the given Tile in EPSG:900913 coordinates
 
@@ -267,18 +151,6 @@ Converts Google Tile system in Mercator bounds (Meters)
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
-# googleBounds
-
-Converts Google Tile system in Mercator bounds (Meters)
-
-**Parameters**
-
--   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
-
 # googleLatLonBounds
 
 Converts Google Tile system in LatLng bounds (degrees)
@@ -287,30 +159,6 @@ Converts Google Tile system in LatLng bounds (degrees)
 
 -   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
-
-# googleLatLonBounds
-
-Converts Google Tile system in LatLng bounds (degrees)
-
-**Parameters**
-
--   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
-
-# tileGoogle
-
-Converts TMS Tile coordinates to Google Tile coordinates
-
-**Parameters**
-
--   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
@@ -338,30 +186,6 @@ Converts Google Tile coordinates to TMS Tile coordinates
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 
 Returns **Tile** 
-
-# googleTile
-
-Converts Google Tile coordinates to TMS Tile coordinates
-
-**Parameters**
-
--   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **Tile** 
-
-# googleTile
-
-Converts Google Tile coordinates to Microsoft QuadKey
-
-**Parameters**
-
--   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **quadkey** 
 
 # googleQuadKey
 
@@ -387,28 +211,6 @@ Converts TMS Tile coordinates to Microsoft QuadKey
 
 Returns **quadkey** 
 
-# tileQuadKey
-
-Converts TMS Tile coordinates to Microsoft QuadKey
-
-**Parameters**
-
--   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **quadkey** 
-
-# quadKeyTile
-
-Converts QuadKey to TMS Tile coordinates
-
-**Parameters**
-
--   `quadkey` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **Tile** 
-
 # quadKeyTile
 
 Converts QuadKey to TMS Tile coordinates
@@ -428,26 +230,6 @@ Converts QuadKey to Google Tile
 -   `quadkey` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **Google** 
-
-# quadKeyGoogle
-
-Converts QuadKey to Google Tile
-
-**Parameters**
-
--   `quadkey` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **Google** 
-
-# boundsLatLngToMeters
-
-Converts bounds from LatLng to Meters
-
-**Parameters**
-
--   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** extent in [minX, minY, maxX, maxY] order
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bounds
 
 # boundsLatLngToMeters
 
@@ -550,43 +332,3 @@ Validates bounds
 const bounds = validateBounds([ -75, 44, -74, 45 ])
 //= [ -75, 44, -74, 45 ]
 ```
-
-# LngLatBounds
-
-LngLatBounds
-
-**Examples**
-
-```javascript
-const { bounds } = new LngLatBounds([ -75, 44, -74, 45 ])
-//= [ -75, 44, -74, 45 ]
-```
-
-# GlobalMercator
-
-Global Mercator
-
-**Examples**
-
-```javascript
-const mercator = GlobalMercator()
-mercator.LatLngToMeters(Tile)
-```
-
-## constructor
-
-Initialize the TMS Global Mercator pyramid
-
-**Parameters**
-
--   `TileSize` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)](default 256)** (default=256)
-
-# Resolution
-
-Resolution (Meters/pixel) for given zoom level (measured at Equator)
-
-**Parameters**
-
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 

@@ -131,11 +131,6 @@ test('latLngToTile', t => {
   t.deepEqual(tile, TILE)
 })
 
-test('LngLatBounds', t => {
-  const { bounds } = new mercator.LngLatBounds(BOUNDS_LATLNG)
-  t.deepEqual(bounds, BOUNDS_LATLNG)
-})
-
 test('validateLatLng', t => {
   t.deepEqual(mercator.validateLatLng([85, -120]), [85, -120])
 })
