@@ -166,5 +166,9 @@ test('validateTile', t => {
 })
 
 test('validateUndefined', t => {
-  t.throws(() => mercator.validateUndefined({x: undefined}), '<x> is required.')
+  t.throws(() => mercator.validateUndefined({x: undefined}), '<x> is required')
+})
+
+test('metersToPixels missing zoom', t => {
+  t.throws(() => mercator.metersToPixels({ mx: -8348968.179247875, my: 5621503.917462073}), '<zoom> is required')
 })

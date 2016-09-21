@@ -1,7 +1,7 @@
 import * as Debug from 'debug'
 import { range, isUndefined, keys } from 'lodash'
 
-const debug = {
+export const debug = {
   error: Debug('global-mercator:error'),
   log: Debug('global-mercator:log'),
   warning: Debug('global-mercator:warning'),
@@ -297,7 +297,7 @@ export function boundsLatLngToMeters(bounds: number[]): number[] {
 export function validateUndefined(items: any, name?: string) {
   for (let key of keys(items)) {
     if (isUndefined(items[key])) {
-      const message = (name) ? `${ name } <${ key }> is required.` : `<${ key }> is required.`
+      const message = (name) ? `${ name } <${ key }> is required` : `<${ key }> is required`
       debug.error(message)
       throw new Error(message)
     }
@@ -514,7 +514,7 @@ export class Pixels {
     const {px, py, zoom} = init
     this.px = px
     this.py = py
-    this.zoom = zoom
+    if (!isUndefined(zoom)) { this.zoom = zoom }
     validateUndefined(this, 'Pixels')
     validatePixels([px, py])
   }
@@ -563,6 +563,11 @@ class GlobalMercator {
   }
 
   public Resolution(zoom: number) {
+    if (isUndefined(zoom)) {
+      const message = '<zoom> is required'
+      debug.error(message)
+      throw new Error(message)
+    }
     return this.initialResolution / Math.pow(2, zoom)
   }
 
@@ -776,5 +781,6 @@ if (require.main === module) {
   // validateUndefined({x: null})
   // console.log(metersToLatLng({mx: 10018754.171394622, my: 5621521.486192067}))
   // console.log(metersToPixels({mx: 10000000, my: 5500000, zoom: 13}))
-  console.log(validateLatLng([-85, -120]))
+  // console.log(metersToPixels({mx: 3000, my: 4000}))
+  console.log(latLngToMeters({lat: 23, lng: 23}))
 }
