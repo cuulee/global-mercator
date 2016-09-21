@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npm run typings",
     "docs": "npm run build && npm run documentation",
-    "documentation": "./node_modules/documentation/bin/documentation.js build index.js -f md > API.md",
+    "documentation": "./node_modules/documentation/bin/documentation.js build index.js -f md > README.md",
     "typings": "./node_modules/typings/dist/bin.js install",
     "test": "npm run build && npm run ava && npm run lint",
     "build": "./node_modules/typescript/bin/tsc",
