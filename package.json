@@ -11,7 +11,8 @@
     "build": "./node_modules/typescript/bin/tsc",
     "ava": "./node_modules/nyc/bin/nyc.js ./node_modules/ava/cli.js",
     "coverage": "./node_modules/nyc/bin/nyc.js ./node_modules/ava/cli.js",
-    "lint": "./node_modules/tslint/bin/tslint index.ts test.ts"
+    "lint": "./node_modules/tslint/bin/tslint index.ts test.ts",
+    "patch": "npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
