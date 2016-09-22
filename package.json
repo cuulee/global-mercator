@@ -1,6 +1,6 @@
 {
   "name": "global-mercator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Global Mercator",
   "main": "index.js",
   "scripts": {
