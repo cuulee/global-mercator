@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "global-mercator",
   "version": "0.2.4",
   "description": "Global Mercator",
