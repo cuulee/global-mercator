@@ -39,39 +39,39 @@ export interface InterfaceTile {
 }
 
 /**
- * Converts given lat/lon in WGS84 Datum to XY in Spherical Mercator EPSG:900913
+ * Converts {LatLng} coordinates to {Meters} coordinates.
  *
  * @name latLngToMeters
  * @param {number} lat
  * @param {number} lng
- * @param {number} zoom (Optional)
+ * @param {number} [zoom]
  * @returns {Meters}
  * @example
- * latLngToMeters({lat: 45, lng: 90})
- * //=> Meters { mx: 10018754.171394622, my: 5621521.486192067 }
+ * latLngToMeters({lat: 37, lng: 126})
+ * //= Meters { mx: 14026255.83995247, my: 4439106.787250587 }
  */
 export function latLngToMeters(init: InterfaceLatLng) {
   return mercator.latLngToMeters(init)
 }
 
 /**
- * Converts XY point from Spherical Mercator EPSG:900913 to lat/lng in WGS84 Datum 
+ * Converts {Meters} coordinates to {LatLng} coordinates.
  * 
  * @name metersToLatLng
  * @param {number} mx
  * @param {number} my
- * @param {number} zoom (Optional)
+ * @param {number} [zoom]
  * @returns {LatLng}
  * @example
- * metersToLatLng({mx: 10000000, my: 5500000})
- * //=> LatLng { lat: 44.2228902348575, lng: 89.83152841195214 }
+ * metersToLatLng({ mx: 14026255, my: 4439106 })
+ * //= LatLng { lat: 36.99999435205559, lng: 125.99999245457859 }
  */
 export function metersToLatLng(init: InterfaceMeters) {
   return mercator.metersToLatLng(init)
 }
 
 /**
- * Converts EPSG:900913 to pyramid pixel coordinates in given zoom level
+ * Converts {Meters} coordinates to {Pixels}.
  * 
  * @name metersToPixels
  * @param {number} mx
@@ -79,246 +79,274 @@ export function metersToLatLng(init: InterfaceMeters) {
  * @param {number} zoom
  * @returns {Pixels}
  * @example
- * metersToPixels({mx: 10000000, my: 5500000, zoom: 13})
- * //=> Pixels { px: 1571882.5818671728, py: 1336394.6200269451, zoom: 13 }
+ * metersToPixels({ mx: 14026255, my: 4439106, zoom: 13 })
+ * //= Pixels { px: 1782579.1560447346, py: 1280877.3387406059, zoom: 13 }
  */
 export function metersToPixels(init: InterfaceMeters) {
   return mercator.metersToPixels(init)
 }
 
 /**
- * Returns Tile for given latlng coordinates
+ * Converts {LatLng} coordinates to TMS {Tile}.
  * 
  * @name latLngToTile
  * @param {number} lat
  * @param {number} lng
  * @param {number} zoom
- * @returns {Tile}
+ * @returns {Tile} TMS Tile
  * @example
- * latLngToTile({lat: 45, lng: 90, zoom: 5})
- * //=> Tile { tx: 23, ty: 20, zoom: 5 }
+ * latLngToTile({lat: 37, lng: 126, zoom: 13 })
+ * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
  */
 export function latLngToTile(init: InterfaceLatLng) {
   return mercator.latLngToTile(init)
 }
 
 /**
- * Returns Google Tile for given latlng coordinates
+ * Converts {LatLng} coordinates to {Google} (XYZ) Tile.
  * 
  * @name latLngToGoogle
  * @param {number} lat
  * @param {number} lng
  * @returns {Google} Google Tile
  * @example
- * latLngToGoogle({lat: 45, lng: 90, zoom: 5})
- * //=> Google { x: 23, y: 11, zoom: 5 }
+ * latLngToGoogle({lat: 37, lng: 126, zoom: 13 })
+ * //= Google { x: 6963, y: 3188, zoom: 13 }
  */
 export function latLngToGoogle(init: InterfaceLatLng) {
   return mercator.latLngToGoogle(init)
 }
 
 /**
- * Returns Tile for given mercator coordinates
+ * Converts {Meters} coordinates to TMS {Tile}.
  * 
  * @name metersToTile
  * @param {number} mx
  * @param {number} my
- * @returns {Tile}
+ * @returns {Tile} TMS Tile
  * @example
- * metersToTile({mx: 10000000, my: 5500000, zoom: 5})
- * //=> Tile { tx: 23, ty: 20, zoom: 5 }
+ * metersToTile({ mx: 14026255, my: 4439106, zoom: 13 })
+ * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
  */
 export function metersToTile(init: Meters) {
   return mercator.metersToTile(init)
 }
 
 /**
- * Converts pixel coordinates in given zoom level of pyramid to EPSG:900913
+ * Converts {Pixels} coordinates to {Meters} coordinates.
  * 
  * @name pixelsToMeters
  * @param {number} px
  * @param {number} py
  * @param {number} zoom
  * @returns {Meters}
+ * @example
+ * pixelsToMeters({ px: 1782579, py: 1280877, zoom: 13 })
+ * //= Meters { mx: 14026252.018101055, my: 4439099.526918683, zoom: 13 }
  */
 export function pixelsToMeters(init: Pixels) {
   return mercator.pixelsToMeters(init)
 }
 
 /**
- * Returns a Tile covering region in given pixel coordinates
+ * Converts {Pixels} coordinates to TMS {Tile}.
  * 
  * @name pixelsToTile
  * @param {number} px
  * @param {number} py
  * @param {number} zoom
- * @returns {Tile}
+ * @returns {Tile} TMS Tile
+ * @example
+ * pixelsToTile({ px: 1782579, py: 1280877, zoom: 13 })
+ * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
  */
 export function pixelsToTile(init: Pixels) {
   return mercator.pixelsToTile(init)
 }
 
 /**
- * Returns bounds of the given Tile in EPSG:900913 coordinates
+ * Converts TMS {Tile} to bounds in {Meters} coordinates.
  * 
  * @name tileBounds
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @example
+ * tileBounds({ tx: 6963, ty: 5003, zoom: 13 })
+ * //= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
  */
 export function tileBounds(init: Tile) {
   return mercator.tileBounds(init)
 }
 
 /**
- * Returns bounds of the given Tile in EPSG:900913 coordinates
+ * Converts TMS {Tile} to bounds in {LatLng} coordinates.
  * 
- * @name tileLatLonBounds
+ * @name tileLatLngBounds
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @example
+ * tileLatLngBounds({ tx: 6963, ty: 5003, zoom: 13 })
+ * //= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
  */
-export function tileLatLonBounds(init: Tile) {
-  return mercator.tileLatLonBounds(init)
+export function tileLatLngBounds(init: Tile) {
+  return mercator.tileLatLngBounds(init)
 }
 
 /**
- * Converts Google Tile system in Mercator bounds (Meters)
+ * Converts {Google} (XYZ) Tile to bounds in {Meters} coordinates.
  * 
  * @name googleBounds
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @example
+ * googleBounds({ x: 6963, y: 3188, zoom: 13 })
+ * //= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
  */
 export function googleBounds(init: Google) {
   return mercator.googleBounds(init)
 }
 
 /**
- * Converts Google Tile system in LatLng bounds (degrees)
+ * Converts {Google} (XYZ) Tile to bounds in {LatLng} coordinates.
  * 
- * @name googleLatLonBounds
+ * @name googleLatLngBounds
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @example
+ * googleLatLngBounds({ x: 6963, y: 3188, zoom: 13 })
+ * //= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
  */
-export function googleLatLonBounds(init: Google) {
-  return mercator.googleLatLonBounds(init)
+export function googleLatLngBounds(init: Google) {
+  return mercator.googleLatLngBounds(init)
 }
 
 /**
- * Converts TMS Tile coordinates to Google Tile coordinates
+ * Converts TMS {Tile} to {Google} (XYZ) Tile.
  * 
  * @name tileGoogle
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @example
+ * tileGoogle({ tx: 6963, ty: 5003, zoom: 13 })
+ * //= Google { x: 6963, y: 3188, zoom: 13 }
  */
 export function tileGoogle(init: Tile) {
   return mercator.tileGoogle(init)
 }
 
 /**
- * Converts Google Tile coordinates to TMS Tile coordinates
+ * Converts {Google} (XYZ) Tile to TMS {Tile}.
  * 
  * @name googleTile
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Tile}
+ * @returns {Tile} TMS Tile
+ * @example
+ * googleTile({ x: 6963, y: 3188, zoom: 13 })
+ * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
  */
 export function googleTile(init: Google) {
   return mercator.googleTile(init)
 }
 
 /**
- * Converts Google Tile coordinates to Microsoft QuadKey
+ * Converts {Google} (XYZ) Tile to {Quadkey}.
  * 
- * @name googleQuadKey
+ * @name googleQuadkey
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {quadkey}
+ * @returns {string} Quadkey
+ * @example
+ * googleQuadkey({ x: 6963, y: 3188, zoom: 13 })
+ * //= '1321102330211'
  */
-export function googleQuadKey(init: Google) {
-  return mercator.googleQuadKey(init)
+export function googleQuadkey(init: Google) {
+  return mercator.googleQuadkey(init)
 }
 
 /**
- * Converts TMS Tile coordinates to Microsoft QuadKey
+ * Converts TMS {Tile} to {QuadKey}.
  * 
- * @name tileQuadKey
+ * @name tileQuadkey
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {quadkey}
+ * @returns {string} Quadkey
+ * @example
+ * tileQuadkey({ tx: 6963, ty: 5003, zoom: 13 })
+ * //= '1321102330211'
  */
-export function tileQuadKey(init: Tile) {
-  return mercator.tileQuadKey(init)
+export function tileQuadkey(init: Tile) {
+  return mercator.tileQuadkey(init)
 }
 
 /**
- * Converts QuadKey to TMS Tile coordinates
+ * Converts {Quadkey} to TMS {Tile}.
  * 
- * @name quadKeyTile
+ * @name quadkeyTile
  * @param {string} quadkey
- * @returns {Tile}
+ * @returns {Tile} TMS Tile
+ * @example
+ * quadkeyTile('1321102330211')
+ * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
  */
-export function quadKeyTile(quadkey: string) {
-  return mercator.quadKeyTile(quadkey)
+export function quadkeyTile(quadkey: string) {
+  return mercator.quadkeyTile(quadkey)
 }
 
 /**
- * Converts QuadKey to Google Tile
+ * Converts {Quadkey} to {Google} (XYZ) Tile.
  * 
- * @name quadKeyGoogle
+ * @name quadkeyGoogle
  * @param {string} quadkey
  * @returns {Google}
+ * @example
+ * quadkeyGoogle('1321102330211')
+ * //= Google { x: 6963, y: 3188, zoom: 13 }
  */
-export function quadKeyGoogle(quadkey: string) {
-  return mercator.quadKeyGoogle(quadkey)
+export function quadkeyGoogle(quadkey: string) {
+  return mercator.quadkeyGoogle(quadkey)
 }
 
 /**
- * Converts bounds from LatLng to Meters
+ * Converts {bbox} from {LatLng} coordinates to {Meters} coordinates
  * 
- * @name boundsLatLngToMeters
- * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
- * @returns {Array<number>} bounds
+ * @name bboxLatLngToMeters
+ * @param {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} {bbox}
+ * @example
+ * bboxLatLngToMeters([ 125, 35, 127, 37 ])
+ * //= [ 13914936.349159198, 4163881.1440642904, 14137575.330745745, 4439106.787250587 ]
  */
-export function boundsLatLngToMeters(bounds: number[]): number[] {
-  return mercator.boundsLatLngToMeters(bounds)
+export function bboxLatLngToMeters(bbox: number[]): number[] {
+  return mercator.bboxLatLngToMeters(bbox)
 }
 
 /**
- * Validate Undefined
- * @name validateUndefined
- * @param {string} name
- * @param {Object} items
+ * Validates TMS {Tile}.
+ * @param {number} tx
+ * @param {number} ty
+ * @param {number} zoom
+ * @param {string} [name=Tile] - name used for debugging message
+ * @throw Will throw an error if TMS {Tile} is not valid.
+ * @return {Object} TMS Tile
  * @example
- * validateUndefined('Meters', Object)
- */
-export function validateUndefined(items: any, name?: string) {
-  for (let key of keys(items)) {
-    if (isUndefined(items[key])) {
-      const message = (name) ? `${ name } <${ key }> is required` : `<${ key }> is required`
-      debug.error(message)
-      throw new Error(message)
-    }
-  }
-}
-
-/**
- * Validates Tile
- * @name validateTile
- * @example
- * const tile = validateTile({tx: 60, ty: 80, zoom: 5})
+ * validateTile({tx: 60, ty: 80, zoom: 5})
  * //= {tx: 60, ty: 80, zoom: 5}
+ * validateTile({tx: 60, ty: -43, zoom: 5})
+ * //= Error: Tile <ty> must not be less than 0
  */
 export function validateTile(init: InterfaceTile, name = 'Tile') {
   const { tx, ty, zoom } = init
@@ -336,11 +364,18 @@ export function validateTile(init: InterfaceTile, name = 'Tile') {
 }
 
 /**
- * Validates Zoom
+ * Validates {Zoom} level.
  * @name validateZoom
+ * @param {number} Zoom level
+ * @throw Will throw an error if zoom is not valid.
+ * @return {number} Zoom level
  * @example
- * const zoom = validateZoom(12)
+ * validateZoom(12)
  * //= 12
+ * validateZoom(-4)
+ * //= Error: <zoom> cannot be less than 1
+ * validateZoom(30)
+ * //= Error: <zoom> cannot be greater than 23
  */
 export function validateZoom(zoom: number, name?: string) {
   if (zoom < 1) {
@@ -356,10 +391,13 @@ export function validateZoom(zoom: number, name?: string) {
 }
 
 /**
- * Validates Pixels
+ * Validates {Pixels} coordinates.
  * @name validatePixels
+ * @param {Array<number>} Pixels coordinates
+ * @throw Will throw an error if {Pixels} is not valid.
+ * @return {Array<number>} Pixels coordinates
  * @example
- * const pixels = validatePixels([-115, 44])
+ * validatePixels([-115, 44])
  * //= [-115, 44]
  */
 export function validatePixels(init: number[]) {
@@ -383,10 +421,13 @@ export function validatePixels(init: number[]) {
 }
 
 /**
- * Validates Meters
+ * Validates {Meters} coordinates.
  * @name validateMeters
+ * @param {Array<number>} Meters coordinates
+ * @throw Will throw an error if {Meters} is not valid.
+ * @return {Array<number>} Meters coordinates
  * @example
- * const meters = validateMeters([-115, 44])
+ * validateMeters([-115, 44])
  * //= [-115, 44]
  */
 export function validateMeters(init: number[]) {
@@ -422,8 +463,11 @@ export function validateMeters(init: number[]) {
 }
 
 /**
- * Validates LatLng
+ * Validates {LatLng} coordinates.
  * @name validateLatLng
+ * @param {Array<number>} LatLng coordinates
+ * @throw Will throw an error if {LatLng} is not valid.
+ * @return {Array<number>} LatLng coordinates
  * @example
  * validateLatLng([-115, 44])
  * //= [-115, 44]
@@ -434,8 +478,11 @@ export function validateLatLng(init: number[]) {
 }
 
 /**
- * Validates LngLat
+ * Validates {LngLat} coordinates.
  * @name validateLngLat
+ * @param {Array<number>} LngLat coordinates
+ * @throw Will throw an error if {LngLat} is not valid.
+ * @return {Array<number>} LngLat coordinates
  * @example
  * validateLngLat([-115, 44])
  * //= [-115, 44]
@@ -470,11 +517,16 @@ export function validateLngLat(init: number[]) {
 }
 
 /**
- * Validates bounds
+ * Validates bounds.
  * @name bounds
+ * @param {Array<number>} bounds
+ * @throw Will throw an error if bounds is not valid.
+ * @returns {Array<number} bounds
  * @example
- * const bounds = validateBounds([ -75, 44, -74, 45 ])
+ * validateBounds([ -75, 44, -74, 45 ])
  * //= [ -75, 44, -74, 45 ]
+ * validateBounds([ -75, 44, -74 ])
+ * //= Error: [bounds] must be an Array of 4 numbers
  */
 export function validateBounds(init: number[]) {
   if (init.length !== 4) {
@@ -483,6 +535,30 @@ export function validateBounds(init: number[]) {
     throw new Error(message)
   }
   return [...init]
+}
+
+/**
+ * Assert undefined items within object.
+ * @name assertUndefined
+ * @param {Object} items
+ * @param {string} [name] - name used for debugging message
+ * @throw Will throw an error if any item in Object is undefined.
+ * @returns {Object} items
+ * @example
+ * assertUndefined({foo: 'bar'})
+ * //= {foo: 'bar'}
+ * assertUndefined({foo: undefined})
+ * //= Error: <foo> is required
+ */
+export function assertUndefined(items: any, name?: string) {
+  for (let key of keys(items)) {
+    if (isUndefined(items[key])) {
+      const message = (name) ? `${ name } <${ key }> is required` : `<${ key }> is required`
+      debug.error(message)
+      throw new Error(message)
+    }
+  }
+  return items
 }
 
 export class Google {
@@ -495,7 +571,7 @@ export class Google {
     this.x = x
     this.y = y
     this.zoom = zoom
-    validateUndefined(this, 'Google')
+    assertUndefined(this, 'Google')
   }
 }
 
@@ -509,7 +585,7 @@ export class Tile {
     this.tx = tx
     this.ty = ty
     this.zoom = zoom
-    validateUndefined(this, 'Tile')
+    assertUndefined(this, 'Tile')
     validateTile(this)
   }
 }
@@ -524,7 +600,7 @@ export class Pixels {
     this.px = px
     this.py = py
     if (!isUndefined(zoom)) { this.zoom = zoom }
-    validateUndefined(this, 'Pixels')
+    assertUndefined(this, 'Pixels')
     validatePixels([px, py])
   }
 }
@@ -539,7 +615,7 @@ export class Meters {
     this.mx = mx
     this.my = my
     if (!isUndefined(zoom)) { this.zoom = zoom }
-    validateUndefined(this, 'Meters')
+    assertUndefined(this, 'Meters')
     validateMeters([mx, my])
   }
 }
@@ -554,7 +630,7 @@ export class LatLng {
     this.lat = lat
     this.lng = lng
     if (!isUndefined(init.zoom)) { this.zoom = init.zoom }
-    validateUndefined(this, 'LatLng')
+    assertUndefined(this, 'LatLng')
     validateLatLng([lat, lng])
   }
 }
@@ -651,7 +727,7 @@ class GlobalMercator {
     return validateBounds([ min.mx, min.my, max.mx, max.my ])
   }
 
-  public tileLatLonBounds(init: Tile) {
+  public tileLatLngBounds(init: Tile) {
     if (init.zoom === 0) { return [ -180, -85.05112877980659, 180, 85.05112877980659 ] }
 
     const {tx, ty, zoom} = new Tile(init)
@@ -667,12 +743,12 @@ class GlobalMercator {
     return this.tileBounds(Tile)
   }
 
-  public googleLatLonBounds(init: Google) {
+  public googleLatLngBounds(init: Google) {
     const Tile = this.googleTile(init)
-    return this.tileLatLonBounds(Tile)
+    return this.tileLatLngBounds(Tile)
   }
 
-  public boundsLatLngToMeters = (bounds: number[]): number[] => {
+  public bboxLatLngToMeters = (bounds: number[]): number[] => {
     const min = this.latLngToMeters({lat: bounds[1], lng: bounds[0]})
     const max = this.latLngToMeters({lat: bounds[3], lng: bounds[2]})
     return [min.mx, min.my, max.mx, max.my]
@@ -696,13 +772,13 @@ class GlobalMercator {
     return new Tile({ tx, ty, zoom })
   }
 
-  public googleQuadKey(init: Google) {
+  public googleQuadkey(init: Google) {
     const Tile = this.googleTile(init)
-    return this.tileQuadKey(Tile)
+    return this.tileQuadkey(Tile)
   }
 
-  public tileQuadKey(init: Tile) {
-    // Zoom 0 does not exist for QuadKey
+  public tileQuadkey(init: Tile) {
+    // Zoom 0 does not exist for Quadkey
     if (init.zoom === 0) { return '' }
 
     let { tx, ty, zoom } = new Tile(init)
@@ -720,12 +796,12 @@ class GlobalMercator {
     return quadkey
   }
 
-  public quadKeyTile(quadkey: string) {
-    const Google = this.quadKeyGoogle(quadkey)
+  public quadkeyTile(quadkey: string) {
+    const Google = this.quadkeyGoogle(quadkey)
     return this.googleTile(Google)
   }
 
-  public quadKeyGoogle(quadkey: string) {
+  public quadkeyGoogle(quadkey: string) {
     let x: number = 0
     let y: number = 0
     const zoom = quadkey.length
@@ -747,7 +823,7 @@ class GlobalMercator {
         y += mask
         break
       default:
-        throw new Error('Invalid QuadKey digit sequence')
+        throw new Error('Invalid Quadkey digit sequence')
       }
     })
     return new Google({ x, y, zoom })
@@ -764,19 +840,19 @@ export default {
   latLngToMeters,
   latLngToGoogle,
   tileBounds,
-  tileLatLonBounds,
+  tileLatLngBounds,
   tileGoogle,
-  tileQuadKey,
-  quadKeyGoogle,
-  quadKeyTile,
+  tileQuadkey,
+  quadkeyGoogle,
+  quadkeyTile,
   googleBounds,
-  googleLatLonBounds,
-  googleQuadKey,
+  googleLatLngBounds,
+  googleQuadkey,
 }
 
 /* istanbul ignore next */
 if (require.main === module) {
-  // const bounds = boundsLatLngToMeters([ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ])
+  // const bounds = bboxLatLngToMeters([ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ])
   // console.log(bounds)
   // const meters = pixelsToMeters({ px: 611669, py: 1342753, zoom: 13 })
   // console.log(meters)
@@ -787,9 +863,10 @@ if (require.main === module) {
   // validateMeters([200000, 999150000])
   // validateMeters([200000, 150000, 1])
   // validatePixels([200000, 150000, 1])
-  // validateUndefined({x: null})
+  // assertUndefined({x: null})
   // console.log(metersToLatLng({mx: 10018754.171394622, my: 5621521.486192067}))
   // console.log(metersToPixels({mx: 10000000, my: 5500000, zoom: 13}))
   // console.log(metersToPixels({mx: 3000, my: 4000}))
   console.log(latLngToMeters({lat: 23, lng: 23}))
+  console.log(validateBounds([ -75, 44, -74 ]))
 }

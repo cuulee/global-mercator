@@ -54,7 +54,7 @@ test('tileBounds', t => {
 })
 
 test('tileLatLonBounds', t => {
-  const bounds = mercator.tileLatLonBounds(TILE)
+  const bounds = mercator.tileLatLngBounds(TILE)
   t.deepEqual(bounds, BOUNDS_LATLNG)
 })
 
@@ -63,23 +63,23 @@ test('tileGoogle', t => {
   t.deepEqual(google, pick(GOOGLE, ['x', 'y', 'zoom']))
 })
 
-test('tileQuadKey', t => {
-  const quadkey = mercator.tileQuadKey(TILE)
+test('tileQuadkey', t => {
+  const quadkey = mercator.tileQuadkey(TILE)
   t.deepEqual(quadkey, QUADKEY)
 })
 
 test('quadKeyGoogle', t => {
-  const google = mercator.quadKeyGoogle(QUADKEY)
+  const google = mercator.quadkeyGoogle(QUADKEY)
   t.deepEqual(google, pick(GOOGLE, ['x', 'y', 'zoom']))
 })
 
 test('quadKeyTile', t => {
-  const tile = mercator.quadKeyTile(QUADKEY)
+  const tile = mercator.quadkeyTile(QUADKEY)
   t.deepEqual(tile, pick(TILE, ['tx', 'ty', 'zoom']))
 })
 
-test('Throws Error quadKeyTile', t => {
-  t.throws(() => mercator.quadKeyTile(QUADKEY_BAD), 'Invalid QuadKey digit sequence')
+test('Throws Error quadkeyTile', t => {
+  t.throws(() => mercator.quadkeyTile(QUADKEY_BAD), 'Invalid Quadkey digit sequence')
 })
 
 test('googleBounds', t => {
@@ -88,7 +88,7 @@ test('googleBounds', t => {
 })
 
 test('googleLatLonBounds', t => {
-  const bounds = mercator.googleLatLonBounds(GOOGLE)
+  const bounds = mercator.googleLatLngBounds(GOOGLE)
   t.deepEqual(bounds, BOUNDS_LATLNG)
 })
 
@@ -98,7 +98,7 @@ test('latLngToGoogle', t => {
 })
 
 test('googleQuadKey', t => {
-  const quadkey = mercator.googleQuadKey(GOOGLE)
+  const quadkey = mercator.googleQuadkey(GOOGLE)
   t.deepEqual(quadkey, QUADKEY)
 })
 
@@ -116,9 +116,9 @@ test('Throws Error Bad LngLat', t => {
   t.throws(() => new mercator.LatLng({ lat: 45, lng: 220 }), 'LatLng [lng] must be within -180 to 180 degrees')
 })
 
-test('boundsLatLngToMeters', t => {
-  const bounds = mercator.boundsLatLngToMeters(BOUNDS_LATLNG)
-  t.deepEqual(bounds.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
+test('bboxLatLngToMeters', t => {
+  const bbox = mercator.bboxLatLngToMeters(BOUNDS_LATLNG)
+  t.deepEqual(bbox.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
 })
 
 test('googleTile', t => {
@@ -166,7 +166,7 @@ test('validateTile', t => {
 })
 
 test('validateUndefined', t => {
-  t.throws(() => mercator.validateUndefined({x: undefined}), '<x> is required')
+  t.throws(() => mercator.assertUndefined({x: undefined}), '<x> is required')
 })
 
 test('metersToPixels missing zoom', t => {
