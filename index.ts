@@ -42,9 +42,9 @@ export interface InterfaceTile {
  * Converts {@link LatLng} coordinates to {@link Meters} coordinates.
  *
  * @name latLngToMeters
- * @param {number} lat
- * @param {number} lng
- * @param {number} [zoom]
+ * @param {number} lat Latitude (Parallels) in decimal degrees
+ * @param {number} lng Longitude (Meridians) in decimal degrees
+ * @param {number} [zoom] Zoom level
  * @returns {Object} Meters coordinates
  * @example
  * latLngToMeters({lat: 37, lng: 126})
@@ -58,9 +58,9 @@ export function latLngToMeters(init: InterfaceLatLng) {
  * Converts {@link Meters} coordinates to {@link LatLng} coordinates.
  * 
  * @name metersToLatLng
- * @param {number} mx
- * @param {number} my
- * @param {number} [zoom]
+ * @param {number} mx Longitudes (Meridians) in meters
+ * @param {number} my Latitudes (Parallels) in decimal degrees
+ * @param {number} [zoom] Zoom level
  * @returns {Object} LatLng coordinates
  * @example
  * metersToLatLng({ mx: 14026255, my: 4439106 })
@@ -74,9 +74,9 @@ export function metersToLatLng(init: InterfaceMeters) {
  * Converts {@link Meters} coordinates to {@link Pixels} coordinates.
  * 
  * @name metersToPixels
- * @param {number} mx
- * @param {number} my
- * @param {number} zoom
+ * @param {number} mx Longitudes (Meridians) in meters
+ * @param {number} my Latitudes (Parallels) in decimal degrees
+ * @param {number} zoom Zoom level
  * @returns {Object} Pixels coordinates
  * @example
  * metersToPixels({ mx: 14026255, my: 4439106, zoom: 13 })
@@ -90,9 +90,9 @@ export function metersToPixels(init: InterfaceMeters) {
  * Converts {@link LatLng} coordinates to TMS {@link Tile}.
  * 
  * @name latLngToTile
- * @param {number} lat
- * @param {number} lng
- * @param {number} zoom
+ * @param {number} lat Latitude (Parallels) in decimal degrees
+ * @param {number} lng Longitude (Meridians) in decimal degrees
+ * @param {number} zoom Zoom level
  * @returns {Object} TMS Tile
  * @example
  * latLngToTile({lat: 37, lng: 126, zoom: 13 })
@@ -106,8 +106,8 @@ export function latLngToTile(init: InterfaceLatLng) {
  * Converts {@link LatLng} coordinates to {@link Google} (XYZ) Tile.
  * 
  * @name latLngToGoogle
- * @param {number} lat
- * @param {number} lng
+ * @param {number} lat Latitude (Parallels) in decimal degrees
+ * @param {number} lng Longitude (Meridians) in decimal degrees
  * @returns {Object} Google (XYZ) Tile
  * @example
  * latLngToGoogle({lat: 37, lng: 126, zoom: 13 })
@@ -121,8 +121,9 @@ export function latLngToGoogle(init: InterfaceLatLng) {
  * Converts {@link Meters} coordinates to TMS {@link Tile}.
  * 
  * @name metersToTile
- * @param {number} mx
- * @param {number} my
+ * @param {number} mx Longitudes (Meridians) in meters
+ * @param {number} my Latitudes (Parallels) in decimal degrees
+ * @param {number} [zoom] Zoom level
  * @returns {Object} TMS Tile
  * @example
  * metersToTile({ mx: 14026255, my: 4439106, zoom: 13 })
@@ -136,9 +137,9 @@ export function metersToTile(init: Meters) {
  * Converts {@link Pixels} coordinates to {@link Meters} coordinates.
  * 
  * @name pixelsToMeters
- * @param {number} px
- * @param {number} py
- * @param {number} zoom
+ * @param {number} px Pixels X
+ * @param {number} py Pixels Y
+ * @param {number} zoom Zoom level
  * @returns {Object} Meters coordinates
  * @example
  * pixelsToMeters({ px: 1782579, py: 1280877, zoom: 13 })
@@ -152,9 +153,9 @@ export function pixelsToMeters(init: Pixels) {
  * Converts {@link Pixels} coordinates to TMS {@link Tile}.
  * 
  * @name pixelsToTile
- * @param {number} px
- * @param {number} py
- * @param {number} zoom
+ * @param {number} px Pixels X
+ * @param {number} py Pixels Y
+ * @param {number} zoom Zoom level
  * @returns {Object} TMS Tile
  * @example
  * pixelsToTile({ px: 1782579, py: 1280877, zoom: 13 })
@@ -168,9 +169,9 @@ export function pixelsToTile(init: Pixels) {
  * Converts TMS {@link Tile} to {@link bbox} in {@link Meters} coordinates.
  * 
  * @name tileBbox
- * @param {number} tx
- * @param {number} ty
- * @param {number} zoom
+ * @param {number} tx TMS Tile X
+ * @param {number} ty TMS Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * tileBbox({ tx: 6963, ty: 5003, zoom: 13 })
@@ -184,9 +185,9 @@ export function tileBbox(init: Tile) {
  * Converts TMS {@link Tile} to {@link bbox} in {@link LatLng} coordinates.
  * 
  * @name tileLatLngBbox
- * @param {number} tx
- * @param {number} ty
- * @param {number} zoom
+ * @param {number} tx TMS Tile X
+ * @param {number} ty TMS Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * tileLatLngBbox({ tx: 6963, ty: 5003, zoom: 13 })
@@ -200,9 +201,9 @@ export function tileLatLngBbox(init: Tile) {
  * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link Meters} coordinates.
  * 
  * @name googleBbox
- * @param {number} x
- * @param {number} y
- * @param {number} zoom
+ * @param {number} x Google (XYZ) Tile X
+ * @param {number} y Google (XYZ) Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * googleBbox({ x: 6963, y: 3188, zoom: 13 })
@@ -216,9 +217,9 @@ export function googleBbox(init: Google) {
  * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link LatLng} coordinates.
  * 
  * @name googleLatLngBbox
- * @param {number} x
- * @param {number} y
- * @param {number} zoom
+ * @param {number} x Google (XYZ) Tile X
+ * @param {number} y Google (XYZ) Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * googleLatLngBbox({ x: 6963, y: 3188, zoom: 13 })
@@ -232,9 +233,9 @@ export function googleLatLngBbox(init: Google) {
  * Converts TMS {@link Tile} to {@link Google} (XYZ) Tile.
  * 
  * @name tileGoogle
- * @param {number} tx
- * @param {number} ty
- * @param {number} zoom
+ * @param {number} tx TMS Tile X
+ * @param {number} ty TMS Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * tileGoogle({ tx: 6963, ty: 5003, zoom: 13 })
@@ -248,9 +249,9 @@ export function tileGoogle(init: Tile) {
  * Converts {@link Google} (XYZ) Tile to TMS {@link Tile}.
  * 
  * @name googleTile
- * @param {number} x
- * @param {number} y
- * @param {number} zoom
+ * @param {number} x Google (XYZ) Tile X
+ * @param {number} y Google (XYZ) Tile Y
+ * @param {number} zoom Zoom level
  * @returns {Object} TMS Tile
  * @example
  * googleTile({ x: 6963, y: 3188, zoom: 13 })
@@ -264,10 +265,10 @@ export function googleTile(init: Google) {
  * Converts {@link Google} (XYZ) Tile to {@link Quadkey}.
  * 
  * @name googleQuadkey
- * @param {number} x
- * @param {number} y
- * @param {number} zoom
- * @returns {string} Quadkey
+ * @param {number} x Google (XYZ) Tile X
+ * @param {number} y Google (XYZ) Tile Y
+ * @param {number} zoom Zoom level
+ * @returns {string} Microsoft's Quadkey schema
  * @example
  * googleQuadkey({ x: 6963, y: 3188, zoom: 13 })
  * //= '1321102330211'
@@ -280,10 +281,10 @@ export function googleQuadkey(init: Google) {
  * Converts TMS {@link Tile} to {@link QuadKey}.
  * 
  * @name tileQuadkey
- * @param {number} tx
- * @param {number} ty
- * @param {number} zoom
- * @returns {string} Quadkey
+ * @param {number} tx TMS Tile X
+ * @param {number} ty TMS Tile Y
+ * @param {number} zoom Zoom level
+ * @returns {string} Microsoft's Quadkey schema
  * @example
  * tileQuadkey({ tx: 6963, ty: 5003, zoom: 13 })
  * //= '1321102330211'
@@ -296,7 +297,7 @@ export function tileQuadkey(init: Tile) {
  * Converts {@link Quadkey} to TMS {@link Tile}.
  * 
  * @name quadkeyTile
- * @param {string} quadkey
+ * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Object} TMS Tile
  * @example
  * quadkeyTile('1321102330211')
@@ -310,7 +311,7 @@ export function quadkeyTile(quadkey: string) {
  * Converts {@link Quadkey} to {@link Google} (XYZ) Tile.
  * 
  * @name quadkeyGoogle
- * @param {string} quadkey
+ * @param {string} quadkey Microsoft's Quadkey schema
  * @returns {Object} Google (XYZ) Tile
  * @example
  * quadkeyGoogle('1321102330211')
@@ -338,11 +339,11 @@ export function bboxLatLngToMeters(bbox: number[]): number[] {
  * Validates TMS {@link Tile}.
  * 
  * @name validateTile
- * @param {number} tx
- * @param {number} ty
- * @param {number} zoom
+ * @param {number} tx TMS Tile X
+ * @param {number} ty TMS Tile Y
+ * @param {number} zoom Zoom level
  * @param {string} [name=Tile] - name used for debugging message
- * @throw Will throw an error if TMS Tile is not valid.
+ * @throws Will throw an error if TMS Tile is not valid.
  * @returns {Object} TMS Tile
  * @example
  * validateTile({tx: 60, ty: 80, zoom: 5})
@@ -369,9 +370,9 @@ export function validateTile(init: InterfaceTile, name = 'Tile') {
  * Validates {@link Zoom} level.
  * 
  * @name validateZoom
- * @param {number} Zoom level
- * @throw Will throw an error if zoom is not valid.
- * @returns {number} Zoom level
+ * @param {number} zoom Zoom level
+ * @throws Will throw an error if zoom is not valid.
+ * @returns {number} zoom Zoom level
  * @example
  * validateZoom(12)
  * //= 12
@@ -398,7 +399,7 @@ export function validateZoom(zoom: number, name?: string) {
  * 
  * @name validatePixels
  * @param {Array<number>} Pixels coordinates
- * @throw Will throw an error if Pixels is not valid.
+ * @throws Will throw an error if Pixels is not valid.
  * @returns {Array<number>} Pixels coordinates
  * @example
  * validatePixels([-115, 44])
@@ -429,7 +430,7 @@ export function validatePixels(init: number[]) {
  * 
  * @name validateMeters
  * @param {Array<number>} Meters coordinates
- * @throw Will throw an error if Meters is not valid.
+ * @throws Will throw an error if Meters is not valid.
  * @returns {Array<number>} Meters coordinates
  * @example
  * validateMeters([-115, 44])
@@ -472,7 +473,7 @@ export function validateMeters(init: number[]) {
  * 
  * @name validateLatLng
  * @param {Array<number>} LatLng coordinates
- * @throw Will throw an error if LatLng is not valid.
+ * @throws Will throw an error if LatLng is not valid.
  * @returns {Array<number>} LatLng coordinates
  * @example
  * validateLatLng([-115, 44])
@@ -488,7 +489,7 @@ export function validateLatLng(init: number[]) {
  * 
  * @name validateLngLat
  * @param {Array<number>} LngLat coordinates
- * @throw Will throw an error if LngLat is not valid.
+ * @throws Will throw an error if LngLat is not valid.
  * @returns {Array<number>} LngLat coordinates
  * @example
  * validateLngLat([-115, 44])
@@ -528,8 +529,8 @@ export function validateLngLat(init: number[]) {
  * 
  * @name validateBbox
  * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
- * @throw Will throw an error if bbox is not valid.
- * @returns {Array<number} bbox extent in [minX, minY, maxX, maxY] order
+ * @throws Will throw an error if bbox is not valid.
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * validateBbox([ -75, 44, -74, 45 ])
  * //= [ -75, 44, -74, 45 ]
@@ -551,7 +552,7 @@ export function validateBbox(init: number[]) {
  * @name assertUndefined
  * @param {Object} items
  * @param {string} [name] - name used for debugging message
- * @throw Will throw an error if any item in Object is undefined.
+ * @throws Will throw an error if any item in Object is undefined.
  * @returns {Object} items
  * @example
  * assertUndefined({foo: 'bar'})

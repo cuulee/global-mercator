@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "docs": "npm run build && npm run documentation",
-    "documentation": "./node_modules/documentation/bin/documentation.js build index.js -f md -c documentation.yml > API.md && cat HEADER.md API.md > README.md",
+    "documentation": "cat HEADER.md > README.md && documentation build index.js -c documentation.yml -f md >> README.md",
     "typings": "./node_modules/typings/dist/bin.js install",
     "test": "npm run build && npm run ava && npm run lint",
     "build": "./node_modules/typescript/bin/tsc",
