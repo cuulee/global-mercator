@@ -477,8 +477,10 @@ export function validateMeters(init: number[]) {
  * @throws {Error} Will throw an error if LatLng is not valid.
  * @returns {Array<number>} LatLng coordinates
  * @example
- * validateLatLng([-115, 44])
- * //= [-115, 44]
+ * validateLatLng([60, -125])
+ * //= [60, -125]
+ * validateLatLng([140, -125])
+ * //= Error: LatLng [lat] must be within -90 to 90 degrees
  */
 export function validateLatLng(init: number[]) {
   const [lng, lat] = validateLngLat([init[1], init[0]])
@@ -495,6 +497,8 @@ export function validateLatLng(init: number[]) {
  * @example
  * validateLngLat([-115, 44])
  * //= [-115, 44]
+ * validateLngLat([-225, 44])
+ * //= Error: LatLng [lng] must be within -180 to 180 degrees
  */
 export function validateLngLat(init: number[]) {
   if (init.length < 2 || init.length >= 3) {

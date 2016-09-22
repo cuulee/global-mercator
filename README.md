@@ -477,8 +477,10 @@ Validates [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordina
 **Examples**
 
 ```javascript
-validateLatLng([-115, 44])
-//= [-115, 44]
+validateLatLng([60, -125])
+//= [60, -125]
+validateLatLng([140, -125])
+//= Error: LatLng [lat] must be within -90 to 90 degrees
 ```
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if LatLng is not valid.
@@ -498,6 +500,8 @@ Validates [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordina
 ```javascript
 validateLngLat([-115, 44])
 //= [-115, 44]
+validateLngLat([-225, 44])
+//= Error: LatLng [lng] must be within -180 to 180 degrees
 ```
 
 -   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if LngLat is not valid.
