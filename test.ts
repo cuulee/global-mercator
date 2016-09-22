@@ -9,8 +9,8 @@ const QUADKEY_BAD = '030486861'
 const LATLNG = { lat: 44.99988840247, lng: -75.00005722045897, zoom: 13 }
 const METERS = { mx: -8348968.179247875, my: 5621503.917462073, zoom: 13 }
 const PIXELS = { px: 611669, py: 1342753, zoom: 13 }
-const BOUNDS = [ -8350592.466098936, 5620873.311978721, -8345700.496288682, 5625765.281788976 ]
-const BOUNDS_LATLNG = [ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ]
+const BBOX = [ -8350592.466098936, 5620873.311978721, -8345700.496288682, 5625765.281788976 ]
+const BBOX_LATLNG = [ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ]
 
 test('latLngToMeters', t => {
   const meters = mercator.latLngToMeters(LATLNG)
@@ -48,14 +48,14 @@ test('pixelsToMeters', t => {
   t.deepEqual(meters.my.toFixed(2), METERS.my.toFixed(2))
 })
 
-test('tileBounds', t => {
-  const bounds = mercator.tileBounds(TILE)
-  t.deepEqual(bounds.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
+test('tileBbox', t => {
+  const bbox = mercator.tileBbox(TILE)
+  t.deepEqual(bbox.map(i => i.toFixed(2)), BBOX.map(i => i.toFixed(2)))
 })
 
-test('tileLatLonBounds', t => {
-  const bounds = mercator.tileLatLngBounds(TILE)
-  t.deepEqual(bounds, BOUNDS_LATLNG)
+test('tileLatLngBbox', t => {
+  const bbox = mercator.tileLatLngBbox(TILE)
+  t.deepEqual(bbox, BBOX_LATLNG)
 })
 
 test('tileGoogle', t => {
@@ -82,14 +82,14 @@ test('Throws Error quadkeyTile', t => {
   t.throws(() => mercator.quadkeyTile(QUADKEY_BAD), 'Invalid Quadkey digit sequence')
 })
 
-test('googleBounds', t => {
-  const bounds = mercator.googleBounds(GOOGLE)
-  t.deepEqual(bounds.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
+test('googleBbox', t => {
+  const bbox = mercator.googleBbox(GOOGLE)
+  t.deepEqual(bbox.map(i => i.toFixed(2)), BBOX.map(i => i.toFixed(2)))
 })
 
-test('googleLatLonBounds', t => {
-  const bounds = mercator.googleLatLngBounds(GOOGLE)
-  t.deepEqual(bounds, BOUNDS_LATLNG)
+test('googleLatLonBbox', t => {
+  const bbox = mercator.googleLatLngBbox(GOOGLE)
+  t.deepEqual(bbox, BBOX_LATLNG)
 })
 
 test('latLngToGoogle', t => {
@@ -102,11 +102,11 @@ test('googleQuadKey', t => {
   t.deepEqual(quadkey, QUADKEY)
 })
 
-test('Throws Error Bad Bounds', t => {
-  t.throws(() => mercator.validateBounds([1]), '[bounds] must be an Array of 4 numbers')
-  t.throws(() => mercator.validateBounds([1, 2]), '[bounds] must be an Array of 4 numbers')
-  t.throws(() => mercator.validateBounds([1, 2, 3]), '[bounds] must be an Array of 4 numbers')
-  t.throws(() => mercator.validateBounds([1, 2, 3, 4, 5]), '[bounds] must be an Array of 4 numbers')
+test('Throws Error Bad bbox', t => {
+  t.throws(() => mercator.validateBbox([1]), '[bbox] must be an Array of 4 numbers')
+  t.throws(() => mercator.validateBbox([1, 2]), '[bbox] must be an Array of 4 numbers')
+  t.throws(() => mercator.validateBbox([1, 2, 3]), '[bbox] must be an Array of 4 numbers')
+  t.throws(() => mercator.validateBbox([1, 2, 3, 4, 5]), '[bbox] must be an Array of 4 numbers')
 })
 
 test('Throws Error Bad LngLat', t => {
@@ -117,8 +117,8 @@ test('Throws Error Bad LngLat', t => {
 })
 
 test('bboxLatLngToMeters', t => {
-  const bbox = mercator.bboxLatLngToMeters(BOUNDS_LATLNG)
-  t.deepEqual(bbox.map(i => i.toFixed(2)), BOUNDS.map(i => i.toFixed(2)))
+  const bbox = mercator.bboxLatLngToMeters(BBOX_LATLNG)
+  t.deepEqual(bbox.map(i => i.toFixed(2)), BBOX.map(i => i.toFixed(2)))
 })
 
 test('googleTile', t => {

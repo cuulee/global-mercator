@@ -28,7 +28,7 @@ import { latLngToMeters } from 'global-mercator'
 
 # latLngToMeters
 
-Converts {LatLng} coordinates to {Meters} coordinates.
+Converts [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
 
 **Parameters**
 
@@ -43,11 +43,11 @@ latLngToMeters({lat: 37, lng: 126})
 //= Meters { mx: 14026255.83995247, my: 4439106.787250587 }
 ```
 
-Returns **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** 
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Meters coordinates
 
 # metersToLatLng
 
-Converts {Meters} coordinates to {LatLng} coordinates.
+Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
 
 **Parameters**
 
@@ -62,11 +62,11 @@ metersToLatLng({ mx: 14026255, my: 4439106 })
 //= LatLng { lat: 36.99999435205559, lng: 125.99999245457859 }
 ```
 
-Returns **[LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System)** 
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** LatLng coordinates
 
 # metersToPixels
 
-Converts {Meters} coordinates to {Pixels}.
+Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates.
 
 **Parameters**
 
@@ -81,11 +81,11 @@ metersToPixels({ mx: 14026255, my: 4439106, zoom: 13 })
 //= Pixels { px: 1782579.1560447346, py: 1280877.3387406059, zoom: 13 }
 ```
 
-Returns **[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx)** 
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Pixels coordinates
 
 # latLngToTile
 
-Converts {LatLng} coordinates to TMS {Tile}.
+Converts [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
@@ -100,11 +100,11 @@ latLngToTile({lat: 37, lng: 126, zoom: 13 })
 //= Tile { tx: 6963, ty: 5003, zoom: 13 }
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
 # latLngToGoogle
 
-Converts {LatLng} coordinates to {Google} (XYZ) Tile.
+Converts [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
 
 **Parameters**
 
@@ -118,11 +118,11 @@ latLngToGoogle({lat: 37, lng: 126, zoom: 13 })
 //= Google { x: 6963, y: 3188, zoom: 13 }
 ```
 
-Returns **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** Google Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Google (XYZ) Tile
 
 # metersToTile
 
-Converts {Meters} coordinates to TMS {Tile}.
+Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
@@ -136,11 +136,11 @@ metersToTile({ mx: 14026255, my: 4439106, zoom: 13 })
 //= Tile { tx: 6963, ty: 5003, zoom: 13 }
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
 # pixelsToMeters
 
-Converts {Pixels} coordinates to {Meters} coordinates.
+Converts [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
 
 **Parameters**
 
@@ -155,11 +155,11 @@ pixelsToMeters({ px: 1782579, py: 1280877, zoom: 13 })
 //= Meters { mx: 14026252.018101055, my: 4439099.526918683, zoom: 13 }
 ```
 
-Returns **[Meters](https://en.wikipedia.org/wiki/Web_Mercator)** 
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Meters coordinates
 
 # pixelsToTile
 
-Converts {Pixels} coordinates to TMS {Tile}.
+Converts [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
@@ -174,30 +174,11 @@ pixelsToTile({ px: 1782579, py: 1280877, zoom: 13 })
 //= Tile { tx: 6963, ty: 5003, zoom: 13 }
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
-# tileBounds
+# tileBbox
 
-Converts TMS {Tile} to bounds in {Meters} coordinates.
-
-**Parameters**
-
--   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-**Examples**
-
-```javascript
-tileBounds({ tx: 6963, ty: 5003, zoom: 13 })
-//= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox} extent in [minX, minY, maxX, maxY] order
-
-# tileLatLngBounds
-
-Converts TMS {Tile} to bounds in {LatLng} coordinates.
+Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [bbox](http://geojson.org/geojson-spec.html#bounding-boxes) in [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
 
 **Parameters**
 
@@ -208,34 +189,34 @@ Converts TMS {Tile} to bounds in {LatLng} coordinates.
 **Examples**
 
 ```javascript
-tileLatLngBounds({ tx: 6963, ty: 5003, zoom: 13 })
-//= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox} extent in [minX, minY, maxX, maxY] order
-
-# googleBounds
-
-Converts {Google} (XYZ) Tile to bounds in {Meters} coordinates.
-
-**Parameters**
-
--   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
-
-**Examples**
-
-```javascript
-googleBounds({ x: 6963, y: 3188, zoom: 13 })
+tileBbox({ tx: 6963, ty: 5003, zoom: 13 })
 //= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
 ```
 
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox} extent in [minX, minY, maxX, maxY] order
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
-# googleLatLngBounds
+# tileLatLngBbox
 
-Converts {Google} (XYZ) Tile to bounds in {LatLng} coordinates.
+Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [bbox](http://geojson.org/geojson-spec.html#bounding-boxes) in [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+
+**Parameters**
+
+-   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+
+**Examples**
+
+```javascript
+tileLatLngBbox({ tx: 6963, ty: 5003, zoom: 13 })
+//= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
+
+# googleBbox
+
+Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [bbox](http://geojson.org/geojson-spec.html#bounding-boxes) in [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
 
 **Parameters**
 
@@ -246,15 +227,34 @@ Converts {Google} (XYZ) Tile to bounds in {LatLng} coordinates.
 **Examples**
 
 ```javascript
-googleLatLngBounds({ x: 6963, y: 3188, zoom: 13 })
+googleBbox({ x: 6963, y: 3188, zoom: 13 })
+//= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
+
+# googleLatLngBbox
+
+Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [bbox](http://geojson.org/geojson-spec.html#bounding-boxes) in [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
+
+**Parameters**
+
+-   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
+
+**Examples**
+
+```javascript
+googleLatLngBbox({ x: 6963, y: 3188, zoom: 13 })
 //= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
 ```
 
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox} extent in [minX, minY, maxX, maxY] order
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
 # tileGoogle
 
-Converts TMS {Tile} to {Google} (XYZ) Tile.
+Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
 
 **Parameters**
 
@@ -269,11 +269,11 @@ tileGoogle({ tx: 6963, ty: 5003, zoom: 13 })
 //= Google { x: 6963, y: 3188, zoom: 13 }
 ```
 
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox} extent in [minX, minY, maxX, maxY] order
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
 # googleTile
 
-Converts {Google} (XYZ) Tile to TMS {Tile}.
+Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
@@ -288,11 +288,11 @@ googleTile({ x: 6963, y: 3188, zoom: 13 })
 //= Tile { tx: 6963, ty: 5003, zoom: 13 }
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
 # googleQuadkey
 
-Converts {Google} (XYZ) Tile to {Quadkey}.
+Converts [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile to [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx).
 
 **Parameters**
 
@@ -311,7 +311,7 @@ Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 # tileQuadkey
 
-Converts TMS {Tile} to {QuadKey}.
+Converts TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map) to [QuadKey](QuadKey).
 
 **Parameters**
 
@@ -330,7 +330,7 @@ Returns **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 # quadkeyTile
 
-Converts {Quadkey} to TMS {Tile}.
+Converts [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx) to TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
@@ -343,11 +343,11 @@ quadkeyTile('1321102330211')
 //= Tile { tx: 6963, ty: 5003, zoom: 13 }
 ```
 
-Returns **[Tile](https://en.wikipedia.org/wiki/Tiled_web_map)** TMS Tile
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
 # quadkeyGoogle
 
-Converts {Quadkey} to {Google} (XYZ) Tile.
+Converts [Quadkey](https://msdn.microsoft.com/en-us/library/bb259689.aspx) to [Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile.
 
 **Parameters**
 
@@ -360,11 +360,15 @@ quadkeyGoogle('1321102330211')
 //= Google { x: 6963, y: 3188, zoom: 13 }
 ```
 
-Returns **[Google](https://en.wikipedia.org/wiki/Tiled_web_map)** 
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Google (XYZ) Tile
 
 # bboxLatLngToMeters
 
-Converts {bbox} from {LatLng} coordinates to {Meters} coordinates
+Converts [bbox](http://geojson.org/geojson-spec.html#bounding-boxes) from [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates to [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates
+
+**Parameters**
+
+-   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** extent in [minX, minY, maxX, maxY] order
 
 **Examples**
 
@@ -373,18 +377,17 @@ bboxLatLngToMeters([ 125, 35, 127, 37 ])
 //= [ 13914936.349159198, 4163881.1440642904, 14137575.330745745, 4439106.787250587 ]
 ```
 
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** {bbox}
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
 # validateTile
 
-Validates TMS {Tile}.
+Validates TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map).
 
 **Parameters**
 
 -   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
 -   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** 
--   `init`  
 -   `name` **\[[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)]** name used for debugging message (optional, default `Tile`)
 
 **Examples**
@@ -400,7 +403,7 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 # validateZoom
 
-Validates {Zoom} level.
+Validates [Zoom](http://wiki.openstreetmap.org/wiki/Zoom_levels) level.
 
 **Parameters**
 
@@ -421,7 +424,7 @@ Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 # validatePixels
 
-Validates {Pixels} coordinates.
+Validates [Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates.
 
 **Parameters**
 
@@ -438,7 +441,7 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 # validateMeters
 
-Validates {Meters} coordinates.
+Validates [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates.
 
 **Parameters**
 
@@ -455,7 +458,7 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 # validateLatLng
 
-Validates {LatLng} coordinates.
+Validates [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
 
 **Parameters**
 
@@ -472,7 +475,7 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 # validateLngLat
 
-Validates {LngLat} coordinates.
+Validates [LngLat](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates.
 
 **Parameters**
 
@@ -487,21 +490,21 @@ validateLngLat([-115, 44])
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** LngLat coordinates
 
-# bounds
+# validateBbox
 
-Validates bounds.
+Validates [bbox](http://geojson.org/geojson-spec.html#bounding-boxes).
 
 **Parameters**
 
--   `bounds` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** 
+-   `bbox` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** extent in [minX, minY, maxX, maxY] order
 
 **Examples**
 
 ```javascript
-validateBounds([ -75, 44, -74, 45 ])
+validateBbox([ -75, 44, -74, 45 ])
 //= [ -75, 44, -74, 45 ]
-validateBounds([ -75, 44, -74 ])
-//= Error: [bounds] must be an Array of 4 numbers
+validateBbox([ -75, 44, -74 ])
+//= Error: [bbox] must be an Array of 4 numbers
 ```
 
 # assertUndefined

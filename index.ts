@@ -39,13 +39,13 @@ export interface InterfaceTile {
 }
 
 /**
- * Converts {LatLng} coordinates to {Meters} coordinates.
+ * Converts {@link LatLng} coordinates to {@link Meters} coordinates.
  *
  * @name latLngToMeters
  * @param {number} lat
  * @param {number} lng
  * @param {number} [zoom]
- * @returns {Meters}
+ * @returns {Object} Meters coordinates
  * @example
  * latLngToMeters({lat: 37, lng: 126})
  * //= Meters { mx: 14026255.83995247, my: 4439106.787250587 }
@@ -55,13 +55,13 @@ export function latLngToMeters(init: InterfaceLatLng) {
 }
 
 /**
- * Converts {Meters} coordinates to {LatLng} coordinates.
+ * Converts {@link Meters} coordinates to {@link LatLng} coordinates.
  * 
  * @name metersToLatLng
  * @param {number} mx
  * @param {number} my
  * @param {number} [zoom]
- * @returns {LatLng}
+ * @returns {Object} LatLng coordinates
  * @example
  * metersToLatLng({ mx: 14026255, my: 4439106 })
  * //= LatLng { lat: 36.99999435205559, lng: 125.99999245457859 }
@@ -71,13 +71,13 @@ export function metersToLatLng(init: InterfaceMeters) {
 }
 
 /**
- * Converts {Meters} coordinates to {Pixels}.
+ * Converts {@link Meters} coordinates to {@link Pixels} coordinates.
  * 
  * @name metersToPixels
  * @param {number} mx
  * @param {number} my
  * @param {number} zoom
- * @returns {Pixels}
+ * @returns {Object} Pixels coordinates
  * @example
  * metersToPixels({ mx: 14026255, my: 4439106, zoom: 13 })
  * //= Pixels { px: 1782579.1560447346, py: 1280877.3387406059, zoom: 13 }
@@ -87,13 +87,13 @@ export function metersToPixels(init: InterfaceMeters) {
 }
 
 /**
- * Converts {LatLng} coordinates to TMS {Tile}.
+ * Converts {@link LatLng} coordinates to TMS {@link Tile}.
  * 
  * @name latLngToTile
  * @param {number} lat
  * @param {number} lng
  * @param {number} zoom
- * @returns {Tile} TMS Tile
+ * @returns {Object} TMS Tile
  * @example
  * latLngToTile({lat: 37, lng: 126, zoom: 13 })
  * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
@@ -103,12 +103,12 @@ export function latLngToTile(init: InterfaceLatLng) {
 }
 
 /**
- * Converts {LatLng} coordinates to {Google} (XYZ) Tile.
+ * Converts {@link LatLng} coordinates to {@link Google} (XYZ) Tile.
  * 
  * @name latLngToGoogle
  * @param {number} lat
  * @param {number} lng
- * @returns {Google} Google Tile
+ * @returns {Object} Google (XYZ) Tile
  * @example
  * latLngToGoogle({lat: 37, lng: 126, zoom: 13 })
  * //= Google { x: 6963, y: 3188, zoom: 13 }
@@ -118,12 +118,12 @@ export function latLngToGoogle(init: InterfaceLatLng) {
 }
 
 /**
- * Converts {Meters} coordinates to TMS {Tile}.
+ * Converts {@link Meters} coordinates to TMS {@link Tile}.
  * 
  * @name metersToTile
  * @param {number} mx
  * @param {number} my
- * @returns {Tile} TMS Tile
+ * @returns {Object} TMS Tile
  * @example
  * metersToTile({ mx: 14026255, my: 4439106, zoom: 13 })
  * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
@@ -133,13 +133,13 @@ export function metersToTile(init: Meters) {
 }
 
 /**
- * Converts {Pixels} coordinates to {Meters} coordinates.
+ * Converts {@link Pixels} coordinates to {@link Meters} coordinates.
  * 
  * @name pixelsToMeters
  * @param {number} px
  * @param {number} py
  * @param {number} zoom
- * @returns {Meters}
+ * @returns {Object} Meters coordinates
  * @example
  * pixelsToMeters({ px: 1782579, py: 1280877, zoom: 13 })
  * //= Meters { mx: 14026252.018101055, my: 4439099.526918683, zoom: 13 }
@@ -149,13 +149,13 @@ export function pixelsToMeters(init: Pixels) {
 }
 
 /**
- * Converts {Pixels} coordinates to TMS {Tile}.
+ * Converts {@link Pixels} coordinates to TMS {@link Tile}.
  * 
  * @name pixelsToTile
  * @param {number} px
  * @param {number} py
  * @param {number} zoom
- * @returns {Tile} TMS Tile
+ * @returns {Object} TMS Tile
  * @example
  * pixelsToTile({ px: 1782579, py: 1280877, zoom: 13 })
  * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
@@ -165,77 +165,77 @@ export function pixelsToTile(init: Pixels) {
 }
 
 /**
- * Converts TMS {Tile} to bounds in {Meters} coordinates.
+ * Converts TMS {@link Tile} to {@link bbox} in {@link Meters} coordinates.
  * 
- * @name tileBounds
+ * @name tileBbox
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * tileBounds({ tx: 6963, ty: 5003, zoom: 13 })
+ * tileBbox({ tx: 6963, ty: 5003, zoom: 13 })
  * //= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
  */
-export function tileBounds(init: Tile) {
-  return mercator.tileBounds(init)
+export function tileBbox(init: Tile) {
+  return mercator.tileBbox(init)
 }
 
 /**
- * Converts TMS {Tile} to bounds in {LatLng} coordinates.
+ * Converts TMS {@link Tile} to {@link bbox} in {@link LatLng} coordinates.
  * 
- * @name tileLatLngBounds
+ * @name tileLatLngBbox
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * tileLatLngBounds({ tx: 6963, ty: 5003, zoom: 13 })
+ * tileLatLngBbox({ tx: 6963, ty: 5003, zoom: 13 })
  * //= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
  */
-export function tileLatLngBounds(init: Tile) {
-  return mercator.tileLatLngBounds(init)
+export function tileLatLngBbox(init: Tile) {
+  return mercator.tileLatLngBbox(init)
 }
 
 /**
- * Converts {Google} (XYZ) Tile to bounds in {Meters} coordinates.
+ * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link Meters} coordinates.
  * 
- * @name googleBounds
+ * @name googleBbox
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * googleBounds({ x: 6963, y: 3188, zoom: 13 })
+ * googleBbox({ x: 6963, y: 3188, zoom: 13 })
  * //= [ 14025277.445990417, 4437016.617897913, 14030169.415800672, 4441908.587708164 ]
  */
-export function googleBounds(init: Google) {
-  return mercator.googleBounds(init)
+export function googleBbox(init: Google) {
+  return mercator.googleBbox(init)
 }
 
 /**
- * Converts {Google} (XYZ) Tile to bounds in {LatLng} coordinates.
+ * Converts {@link Google} (XYZ) Tile to {@link bbox} in {@link LatLng} coordinates.
  * 
- * @name googleLatLngBounds
+ * @name googleLatLngBbox
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * googleLatLngBounds({ x: 6963, y: 3188, zoom: 13 })
+ * googleLatLngBbox({ x: 6963, y: 3188, zoom: 13 })
  * //= [ 125.99121093749999, 36.98500309285596, 126.03515625, 37.020098201368135 ]
  */
-export function googleLatLngBounds(init: Google) {
-  return mercator.googleLatLngBounds(init)
+export function googleLatLngBbox(init: Google) {
+  return mercator.googleLatLngBbox(init)
 }
 
 /**
- * Converts TMS {Tile} to {Google} (XYZ) Tile.
+ * Converts TMS {@link Tile} to {@link Google} (XYZ) Tile.
  * 
  * @name tileGoogle
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
- * @returns {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * tileGoogle({ tx: 6963, ty: 5003, zoom: 13 })
  * //= Google { x: 6963, y: 3188, zoom: 13 }
@@ -245,13 +245,13 @@ export function tileGoogle(init: Tile) {
 }
 
 /**
- * Converts {Google} (XYZ) Tile to TMS {Tile}.
+ * Converts {@link Google} (XYZ) Tile to TMS {@link Tile}.
  * 
  * @name googleTile
  * @param {number} x
  * @param {number} y
  * @param {number} zoom
- * @returns {Tile} TMS Tile
+ * @returns {Object} TMS Tile
  * @example
  * googleTile({ x: 6963, y: 3188, zoom: 13 })
  * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
@@ -261,7 +261,7 @@ export function googleTile(init: Google) {
 }
 
 /**
- * Converts {Google} (XYZ) Tile to {Quadkey}.
+ * Converts {@link Google} (XYZ) Tile to {@link Quadkey}.
  * 
  * @name googleQuadkey
  * @param {number} x
@@ -277,7 +277,7 @@ export function googleQuadkey(init: Google) {
 }
 
 /**
- * Converts TMS {Tile} to {QuadKey}.
+ * Converts TMS {@link Tile} to {@link QuadKey}.
  * 
  * @name tileQuadkey
  * @param {number} tx
@@ -293,11 +293,11 @@ export function tileQuadkey(init: Tile) {
 }
 
 /**
- * Converts {Quadkey} to TMS {Tile}.
+ * Converts {@link Quadkey} to TMS {@link Tile}.
  * 
  * @name quadkeyTile
  * @param {string} quadkey
- * @returns {Tile} TMS Tile
+ * @returns {Object} TMS Tile
  * @example
  * quadkeyTile('1321102330211')
  * //= Tile { tx: 6963, ty: 5003, zoom: 13 }
@@ -307,11 +307,11 @@ export function quadkeyTile(quadkey: string) {
 }
 
 /**
- * Converts {Quadkey} to {Google} (XYZ) Tile.
+ * Converts {@link Quadkey} to {@link Google} (XYZ) Tile.
  * 
  * @name quadkeyGoogle
  * @param {string} quadkey
- * @returns {Google}
+ * @returns {Object} Google (XYZ) Tile
  * @example
  * quadkeyGoogle('1321102330211')
  * //= Google { x: 6963, y: 3188, zoom: 13 }
@@ -321,11 +321,11 @@ export function quadkeyGoogle(quadkey: string) {
 }
 
 /**
- * Converts {bbox} from {LatLng} coordinates to {Meters} coordinates
+ * Converts {@link bbox} from {@link LatLng} coordinates to {@link Meters} coordinates
  * 
  * @name bboxLatLngToMeters
- * @param {Array<number>} {bbox} extent in [minX, minY, maxX, maxY] order
- * @returns {Array<number>} {bbox}
+ * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * bboxLatLngToMeters([ 125, 35, 127, 37 ])
  * //= [ 13914936.349159198, 4163881.1440642904, 14137575.330745745, 4439106.787250587 ]
@@ -335,13 +335,15 @@ export function bboxLatLngToMeters(bbox: number[]): number[] {
 }
 
 /**
- * Validates TMS {Tile}.
+ * Validates TMS {@link Tile}.
+ * 
+ * @name validateTile
  * @param {number} tx
  * @param {number} ty
  * @param {number} zoom
  * @param {string} [name=Tile] - name used for debugging message
- * @throw Will throw an error if TMS {Tile} is not valid.
- * @return {Object} TMS Tile
+ * @throw Will throw an error if TMS Tile is not valid.
+ * @returns {Object} TMS Tile
  * @example
  * validateTile({tx: 60, ty: 80, zoom: 5})
  * //= {tx: 60, ty: 80, zoom: 5}
@@ -364,11 +366,12 @@ export function validateTile(init: InterfaceTile, name = 'Tile') {
 }
 
 /**
- * Validates {Zoom} level.
+ * Validates {@link Zoom} level.
+ * 
  * @name validateZoom
  * @param {number} Zoom level
  * @throw Will throw an error if zoom is not valid.
- * @return {number} Zoom level
+ * @returns {number} Zoom level
  * @example
  * validateZoom(12)
  * //= 12
@@ -391,11 +394,12 @@ export function validateZoom(zoom: number, name?: string) {
 }
 
 /**
- * Validates {Pixels} coordinates.
+ * Validates {@link Pixels} coordinates.
+ * 
  * @name validatePixels
  * @param {Array<number>} Pixels coordinates
- * @throw Will throw an error if {Pixels} is not valid.
- * @return {Array<number>} Pixels coordinates
+ * @throw Will throw an error if Pixels is not valid.
+ * @returns {Array<number>} Pixels coordinates
  * @example
  * validatePixels([-115, 44])
  * //= [-115, 44]
@@ -421,11 +425,12 @@ export function validatePixels(init: number[]) {
 }
 
 /**
- * Validates {Meters} coordinates.
+ * Validates {@link Meters} coordinates.
+ * 
  * @name validateMeters
  * @param {Array<number>} Meters coordinates
- * @throw Will throw an error if {Meters} is not valid.
- * @return {Array<number>} Meters coordinates
+ * @throw Will throw an error if Meters is not valid.
+ * @returns {Array<number>} Meters coordinates
  * @example
  * validateMeters([-115, 44])
  * //= [-115, 44]
@@ -463,11 +468,12 @@ export function validateMeters(init: number[]) {
 }
 
 /**
- * Validates {LatLng} coordinates.
+ * Validates {@link LatLng} coordinates.
+ * 
  * @name validateLatLng
  * @param {Array<number>} LatLng coordinates
- * @throw Will throw an error if {LatLng} is not valid.
- * @return {Array<number>} LatLng coordinates
+ * @throw Will throw an error if LatLng is not valid.
+ * @returns {Array<number>} LatLng coordinates
  * @example
  * validateLatLng([-115, 44])
  * //= [-115, 44]
@@ -478,11 +484,12 @@ export function validateLatLng(init: number[]) {
 }
 
 /**
- * Validates {LngLat} coordinates.
+ * Validates {@link LngLat} coordinates.
+ * 
  * @name validateLngLat
  * @param {Array<number>} LngLat coordinates
- * @throw Will throw an error if {LngLat} is not valid.
- * @return {Array<number>} LngLat coordinates
+ * @throw Will throw an error if LngLat is not valid.
+ * @returns {Array<number>} LngLat coordinates
  * @example
  * validateLngLat([-115, 44])
  * //= [-115, 44]
@@ -517,20 +524,21 @@ export function validateLngLat(init: number[]) {
 }
 
 /**
- * Validates bounds.
- * @name bounds
- * @param {Array<number>} bounds
- * @throw Will throw an error if bounds is not valid.
- * @returns {Array<number} bounds
+ * Validates {@link bbox}.
+ * 
+ * @name validateBbox
+ * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
+ * @throw Will throw an error if bbox is not valid.
+ * @returns {Array<number} bbox extent in [minX, minY, maxX, maxY] order
  * @example
- * validateBounds([ -75, 44, -74, 45 ])
+ * validateBbox([ -75, 44, -74, 45 ])
  * //= [ -75, 44, -74, 45 ]
- * validateBounds([ -75, 44, -74 ])
- * //= Error: [bounds] must be an Array of 4 numbers
+ * validateBbox([ -75, 44, -74 ])
+ * //= Error: [bbox] must be an Array of 4 numbers
  */
-export function validateBounds(init: number[]) {
+export function validateBbox(init: number[]) {
   if (init.length !== 4) {
-    const message = '[bounds] must be an Array of 4 numbers'
+    const message = '[bbox] must be an Array of 4 numbers'
     debug.error(message)
     throw new Error(message)
   }
@@ -539,6 +547,7 @@ export function validateBounds(init: number[]) {
 
 /**
  * Assert undefined items within object.
+ * 
  * @name assertUndefined
  * @param {Object} items
  * @param {string} [name] - name used for debugging message
@@ -719,38 +728,38 @@ class GlobalMercator {
     return new Tile({ tx, ty, zoom })
   }
 
-  public tileBounds(init: Tile) {
+  public tileBbox(init: Tile) {
     const {tx, ty, zoom} = new Tile(init)
     let min = this.pixelsToMeters({ px: tx * this.TileSize, py: ty * this.TileSize, zoom })
     let max = this.pixelsToMeters({ px: (tx + 1) * this.TileSize, py: (ty + 1) * this.TileSize, zoom })
 
-    return validateBounds([ min.mx, min.my, max.mx, max.my ])
+    return validateBbox([ min.mx, min.my, max.mx, max.my ])
   }
 
-  public tileLatLngBounds(init: Tile) {
+  public tileLatLngBbox(init: Tile) {
     if (init.zoom === 0) { return [ -180, -85.05112877980659, 180, 85.05112877980659 ] }
 
     const {tx, ty, zoom} = new Tile(init)
-    const [mx1, my1, mx2, my2] = this.tileBounds({ tx, ty, zoom })
+    const [mx1, my1, mx2, my2] = this.tileBbox({ tx, ty, zoom })
     const min = this.metersToLatLng({ mx: mx1, my: my1, zoom })
     const max = this.metersToLatLng({ mx: mx2, my: my2, zoom })
 
-    return validateBounds([ min.lng, min.lat, max.lng, max.lat ])
+    return validateBbox([ min.lng, min.lat, max.lng, max.lat ])
   }
 
-  public googleBounds(init: Google) {
+  public googleBbox(init: Google) {
     const Tile = this.googleTile(init)
-    return this.tileBounds(Tile)
+    return this.tileBbox(Tile)
   }
 
-  public googleLatLngBounds(init: Google) {
+  public googleLatLngBbox(init: Google) {
     const Tile = this.googleTile(init)
-    return this.tileLatLngBounds(Tile)
+    return this.tileLatLngBbox(Tile)
   }
 
-  public bboxLatLngToMeters = (bounds: number[]): number[] => {
-    const min = this.latLngToMeters({lat: bounds[1], lng: bounds[0]})
-    const max = this.latLngToMeters({lat: bounds[3], lng: bounds[2]})
+  public bboxLatLngToMeters = (bbox: number[]): number[] => {
+    const min = this.latLngToMeters({lat: bbox[1], lng: bbox[0]})
+    const max = this.latLngToMeters({lat: bbox[3], lng: bbox[2]})
     return [min.mx, min.my, max.mx, max.my]
   }
 
@@ -839,21 +848,21 @@ export default {
   pixelsToMeters,
   latLngToMeters,
   latLngToGoogle,
-  tileBounds,
-  tileLatLngBounds,
+  tileBbox,
+  tileLatLngBbox,
   tileGoogle,
   tileQuadkey,
   quadkeyGoogle,
   quadkeyTile,
-  googleBounds,
-  googleLatLngBounds,
+  googleBbox,
+  googleLatLngBbox,
   googleQuadkey,
 }
 
 /* istanbul ignore next */
 if (require.main === module) {
-  // const bounds = bboxLatLngToMeters([ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ])
-  // console.log(bounds)
+  // const bbox = bboxLatLngToMeters([ -75.01464843750001, 44.99588261816546, -74.97070312499999, 45.02695045318546 ])
+  // console.log(bbox)
   // const meters = pixelsToMeters({ px: 611669, py: 1342753, zoom: 13 })
   // console.log(meters)
   // console.log(metersToPixels(meters))
@@ -868,5 +877,5 @@ if (require.main === module) {
   // console.log(metersToPixels({mx: 10000000, my: 5500000, zoom: 13}))
   // console.log(metersToPixels({mx: 3000, my: 4000}))
   console.log(latLngToMeters({lat: 23, lng: 23}))
-  console.log(validateBounds([ -75, 44, -74 ]))
+  console.log(validateBbox([ -75, 44, -74 ]))
 }
