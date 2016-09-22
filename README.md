@@ -110,6 +110,7 @@ Converts [LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinat
 
 -   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Latitude (Parallels) in decimal degrees
 -   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Longitude (Meridians) in decimal degrees
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
 
@@ -128,7 +129,7 @@ Converts [Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates to TMS
 
 -   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Longitudes (Meridians) in meters
 -   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Latitudes (Parallels) in decimal degrees
--   `zoom` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Zoom level
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
 
 **Examples**
 
@@ -400,7 +401,7 @@ validateTile({tx: 60, ty: -43, zoom: 5})
 //= Error: Tile <ty> must not be less than 0
 ```
 
--   Throws **any** Will throw an error if TMS Tile is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if TMS Tile is not valid.
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** TMS Tile
 
@@ -423,7 +424,7 @@ validateZoom(30)
 //= Error: <zoom> cannot be greater than 23
 ```
 
--   Throws **any** Will throw an error if zoom is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if zoom is not valid.
 
 Returns **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** zoom Zoom level
 
@@ -442,7 +443,7 @@ validatePixels([-115, 44])
 //= [-115, 44]
 ```
 
--   Throws **any** Will throw an error if Pixels is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if Pixels is not valid.
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** Pixels coordinates
 
@@ -461,7 +462,7 @@ validateMeters([-115, 44])
 //= [-115, 44]
 ```
 
--   Throws **any** Will throw an error if Meters is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if Meters is not valid.
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** Meters coordinates
 
@@ -480,7 +481,7 @@ validateLatLng([-115, 44])
 //= [-115, 44]
 ```
 
--   Throws **any** Will throw an error if LatLng is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if LatLng is not valid.
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** LatLng coordinates
 
@@ -499,7 +500,7 @@ validateLngLat([-115, 44])
 //= [-115, 44]
 ```
 
--   Throws **any** Will throw an error if LngLat is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if LngLat is not valid.
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** LngLat coordinates
 
@@ -520,7 +521,7 @@ validateBbox([ -75, 44, -74 ])
 //= Error: [bbox] must be an Array of 4 numbers
 ```
 
--   Throws **any** Will throw an error if bbox is not valid.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if bbox is not valid.
 
 Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)>** bbox extent in [minX, minY, maxX, maxY] order
 
@@ -542,6 +543,64 @@ assertUndefined({foo: undefined})
 //= Error: <foo> is required
 ```
 
--   Throws **any** Will throw an error if any item in Object is undefined.
+-   Throws **[Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)** Will throw an error if any item in Object is undefined.
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** items
+
+# Google
+
+[Google](https://en.wikipedia.org/wiki/Tiled_web_map) (XYZ) Tile
+
+**Properties**
+
+-   `x` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Google (XYZ) Tile X
+-   `y` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Google (XYZ) Tile Y
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+# Tile
+
+TMS [Tile](https://en.wikipedia.org/wiki/Tiled_web_map)
+
+**Properties**
+
+-   `tx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile X
+-   `ty` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** TMS Tile Y
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+# Pixels
+
+[Pixels](https://msdn.microsoft.com/en-us/library/bb259689.aspx) coordinates
+
+**Properties**
+
+-   `px` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels X
+-   `py` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Pixels Y
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+# Meters
+
+[Meters](https://en.wikipedia.org/wiki/Web_Mercator) coordinates
+
+**Properties**
+
+-   `mx` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Longitudes (Meridians) in meters
+-   `my` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Latitudes (Parallels) in decimal degrees
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+# LatLng
+
+[LatLng](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinates
+
+**Properties**
+
+-   `lat` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Latitude (Parallels) in decimal degrees
+-   `lng` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Longitude (Meridians) in decimal degrees
+-   `zoom` **[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Zoom level
+
+# GlobalMercator
+
+GlobalMercator
+
+**Properties**
+
+-   `tileSize` **\[[number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)]** Tile size dimension

@@ -108,6 +108,7 @@ export function latLngToTile(init: InterfaceLatLng) {
  * @name latLngToGoogle
  * @param {number} lat Latitude (Parallels) in decimal degrees
  * @param {number} lng Longitude (Meridians) in decimal degrees
+ * @param {number} zoom Zoom level
  * @returns {Object} Google (XYZ) Tile
  * @example
  * latLngToGoogle({lat: 37, lng: 126, zoom: 13 })
@@ -123,7 +124,7 @@ export function latLngToGoogle(init: InterfaceLatLng) {
  * @name metersToTile
  * @param {number} mx Longitudes (Meridians) in meters
  * @param {number} my Latitudes (Parallels) in decimal degrees
- * @param {number} [zoom] Zoom level
+ * @param {number} zoom Zoom level
  * @returns {Object} TMS Tile
  * @example
  * metersToTile({ mx: 14026255, my: 4439106, zoom: 13 })
@@ -343,7 +344,7 @@ export function bboxLatLngToMeters(bbox: number[]): number[] {
  * @param {number} ty TMS Tile Y
  * @param {number} zoom Zoom level
  * @param {string} [name=Tile] - name used for debugging message
- * @throws Will throw an error if TMS Tile is not valid.
+ * @throws {Error} Will throw an error if TMS Tile is not valid.
  * @returns {Object} TMS Tile
  * @example
  * validateTile({tx: 60, ty: 80, zoom: 5})
@@ -371,7 +372,7 @@ export function validateTile(init: InterfaceTile, name = 'Tile') {
  * 
  * @name validateZoom
  * @param {number} zoom Zoom level
- * @throws Will throw an error if zoom is not valid.
+ * @throws {Error} Will throw an error if zoom is not valid.
  * @returns {number} zoom Zoom level
  * @example
  * validateZoom(12)
@@ -399,7 +400,7 @@ export function validateZoom(zoom: number, name?: string) {
  * 
  * @name validatePixels
  * @param {Array<number>} Pixels coordinates
- * @throws Will throw an error if Pixels is not valid.
+ * @throws {Error} Will throw an error if Pixels is not valid.
  * @returns {Array<number>} Pixels coordinates
  * @example
  * validatePixels([-115, 44])
@@ -430,7 +431,7 @@ export function validatePixels(init: number[]) {
  * 
  * @name validateMeters
  * @param {Array<number>} Meters coordinates
- * @throws Will throw an error if Meters is not valid.
+ * @throws {Error} Will throw an error if Meters is not valid.
  * @returns {Array<number>} Meters coordinates
  * @example
  * validateMeters([-115, 44])
@@ -473,7 +474,7 @@ export function validateMeters(init: number[]) {
  * 
  * @name validateLatLng
  * @param {Array<number>} LatLng coordinates
- * @throws Will throw an error if LatLng is not valid.
+ * @throws {Error} Will throw an error if LatLng is not valid.
  * @returns {Array<number>} LatLng coordinates
  * @example
  * validateLatLng([-115, 44])
@@ -489,7 +490,7 @@ export function validateLatLng(init: number[]) {
  * 
  * @name validateLngLat
  * @param {Array<number>} LngLat coordinates
- * @throws Will throw an error if LngLat is not valid.
+ * @throws {Error} Will throw an error if LngLat is not valid.
  * @returns {Array<number>} LngLat coordinates
  * @example
  * validateLngLat([-115, 44])
@@ -529,7 +530,7 @@ export function validateLngLat(init: number[]) {
  * 
  * @name validateBbox
  * @param {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
- * @throws Will throw an error if bbox is not valid.
+ * @throws {Error} Will throw an error if bbox is not valid.
  * @returns {Array<number>} bbox extent in [minX, minY, maxX, maxY] order
  * @example
  * validateBbox([ -75, 44, -74, 45 ])
@@ -552,7 +553,7 @@ export function validateBbox(init: number[]) {
  * @name assertUndefined
  * @param {Object} items
  * @param {string} [name] - name used for debugging message
- * @throws Will throw an error if any item in Object is undefined.
+ * @throws {Error} Will throw an error if any item in Object is undefined.
  * @returns {Object} items
  * @example
  * assertUndefined({foo: 'bar'})
@@ -571,6 +572,14 @@ export function assertUndefined(items: any, name?: string) {
   return items
 }
 
+/**
+ * {@link Google} (XYZ) Tile
+ * 
+ * @class Google
+ * @property {number} x Google (XYZ) Tile X
+ * @property {number} y Google (XYZ) Tile Y
+ * @property {number} zoom Zoom level
+ */
 export class Google {
   public x: number
   public y: number
@@ -585,6 +594,14 @@ export class Google {
   }
 }
 
+/**
+ * TMS {@link Tile}
+ * 
+ * @class Tile
+ * @property {number} tx TMS Tile X
+ * @property {number} ty TMS Tile Y
+ * @property {number} zoom Zoom level
+ */
 export class Tile {
   public tx: number
   public ty: number
@@ -600,6 +617,14 @@ export class Tile {
   }
 }
 
+/**
+ * {@link Pixels} coordinates
+ * 
+ * @class Pixels
+ * @property {number} px Pixels X
+ * @property {number} py Pixels Y
+ * @property {number} zoom Zoom level
+ */
 export class Pixels {
   public px: number
   public py: number
@@ -615,6 +640,14 @@ export class Pixels {
   }
 }
 
+/**
+ * {@link Meters} coordinates
+ * 
+ * @class Meters
+ * @property {number} mx Longitudes (Meridians) in meters
+ * @property {number} my Latitudes (Parallels) in decimal degrees
+ * @property {number} zoom Zoom level
+ */
 export class Meters {
   public mx: number
   public my: number
@@ -630,6 +663,14 @@ export class Meters {
   }
 }
 
+/**
+ * {@link LatLng} coordinates
+ * 
+ * @class LatLng
+ * @property {number} lat Latitude (Parallels) in decimal degrees
+ * @property {number} lng Longitude (Meridians) in decimal degrees
+ * @property {number} zoom Zoom level
+ */
 export class LatLng {
   public lat: number
   public lng: number
@@ -645,15 +686,21 @@ export class LatLng {
   }
 }
 
-class GlobalMercator {
+/**
+ * GlobalMercator
+ * 
+ * @class GlobalMercator
+ * @property {number} [tileSize=256] Tile size dimension
+ */
+export class GlobalMercator {
   public name: string = 'GlobalMercator'
-  private TileSize: number
+  private tileSize: number
   private initialResolution: number
   private originShift: number
 
-  constructor(TileSize: number = 256) {
-    this.TileSize = TileSize
-    this.initialResolution = 2 * Math.PI * 6378137 / this.TileSize
+  constructor(tileSize: number = 256) {
+    this.tileSize = tileSize
+    this.initialResolution = 2 * Math.PI * 6378137 / this.tileSize
     this.originShift = 2 * Math.PI * 6378137 / 2.0
   }
 
@@ -722,8 +769,8 @@ class GlobalMercator {
   public pixelsToTile(init: Pixels) {
     if (init.zoom === 0) { return new Tile({ tx: 0, ty: 0, zoom: 0 })}
     const {px, py, zoom} = new Pixels(init)
-    let tx = Math.ceil(px / this.TileSize) - 1
-    let ty = Math.ceil(py / this.TileSize) - 1
+    let tx = Math.ceil(px / this.tileSize) - 1
+    let ty = Math.ceil(py / this.tileSize) - 1
     if (tx < 0) { tx = 0 }
     if (ty < 0) { ty = 0 }
     return new Tile({ tx, ty, zoom })
@@ -731,8 +778,8 @@ class GlobalMercator {
 
   public tileBbox(init: Tile) {
     const {tx, ty, zoom} = new Tile(init)
-    let min = this.pixelsToMeters({ px: tx * this.TileSize, py: ty * this.TileSize, zoom })
-    let max = this.pixelsToMeters({ px: (tx + 1) * this.TileSize, py: (ty + 1) * this.TileSize, zoom })
+    let min = this.pixelsToMeters({ px: tx * this.tileSize, py: ty * this.tileSize, zoom })
+    let max = this.pixelsToMeters({ px: (tx + 1) * this.tileSize, py: (ty + 1) * this.tileSize, zoom })
 
     return validateBbox([ min.mx, min.my, max.mx, max.my ])
   }
